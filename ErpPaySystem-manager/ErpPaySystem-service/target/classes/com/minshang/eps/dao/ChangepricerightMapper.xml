@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.ChangepricerightMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Changepriceright" >
+    <id column="rightid" property="rightid" jdbcType="INTEGER" />
+    <result column="changepriceid" property="changepriceid" jdbcType="INTEGER" />
+    <result column="orgid" property="orgid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rightid, changepriceid, orgid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_changepriceright
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_changepriceright
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Changepriceright" >
+    insert into tb_dini_changepriceright (rightid, changepriceid, orgid
+      )
+    values (#{rightid,jdbcType=INTEGER}, #{changepriceid,jdbcType=INTEGER}, #{orgid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Changepriceright" >
+    insert into tb_dini_changepriceright
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rightid != null" >
+        rightid,
+      </if>
+      <if test="changepriceid != null" >
+        changepriceid,
+      </if>
+      <if test="orgid != null" >
+        orgid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rightid != null" >
+        #{rightid,jdbcType=INTEGER},
+      </if>
+      <if test="changepriceid != null" >
+        #{changepriceid,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Changepriceright" >
+    update tb_dini_changepriceright
+    <set >
+      <if test="changepriceid != null" >
+        changepriceid = #{changepriceid,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        orgid = #{orgid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Changepriceright" >
+    update tb_dini_changepriceright
+    set changepriceid = #{changepriceid,jdbcType=INTEGER},
+      orgid = #{orgid,jdbcType=INTEGER}
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </update>
+</mapper>

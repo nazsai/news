@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.DishestypeMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Dishestype" >
+    <id column="dishestypeid" property="dishestypeid" jdbcType="INTEGER" />
+    <result column="dishestypename" property="dishestypename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dishestypeid, dishestypename
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_dishestype
+    where dishestypeid = #{dishestypeid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="select" resultMap="BaseResultMap" parameterType="com.minshang.eps.entity.Dishestype">
+  	select 
+    <include refid="Base_Column_List" />
+    from tb_dini_dishestype
+  	<if test="dishestypename != null">
+  		where dishestypename like CONCAT('%',#{dishestypename},'%')
+  	</if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_dishestype
+    where dishestypeid = #{dishestypeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Dishestype" >
+    insert into tb_dini_dishestype (dishestypeid, dishestypename)
+    values (#{dishestypeid,jdbcType=INTEGER}, #{dishestypename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Dishestype" >
+    insert into tb_dini_dishestype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dishestypeid != null" >
+        dishestypeid,
+      </if>
+      <if test="dishestypename != null" >
+        dishestypename,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dishestypeid != null" >
+        #{dishestypeid,jdbcType=INTEGER},
+      </if>
+      <if test="dishestypename != null" >
+        #{dishestypename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Dishestype" >
+    update tb_dini_dishestype
+    <set >
+      <if test="dishestypename != null" >
+        dishestypename = #{dishestypename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dishestypeid = #{dishestypeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Dishestype" >
+    update tb_dini_dishestype
+    set dishestypename = #{dishestypename,jdbcType=VARCHAR}
+    where dishestypeid = #{dishestypeid,jdbcType=INTEGER}
+  </update>
+</mapper>

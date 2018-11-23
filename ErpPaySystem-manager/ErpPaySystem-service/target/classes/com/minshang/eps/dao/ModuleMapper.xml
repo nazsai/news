@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.ModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Module" >
+    <id column="moduleid" property="moduleid" jdbcType="INTEGER" />
+    <result column="modulename" property="modulename" jdbcType="VARCHAR" />
+    <result column="moduletype" property="moduletype" jdbcType="TINYINT" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="rolename" property="rolename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    moduleid, modulename, moduletype, state, url
+  </sql>
+  <select id="selectAllModules" resultMap="BaseResultMap">
+  	SELECT r.rolename,m.moduleid,m.modulename,m.url,mr.parentid FROM tb_sys_module m 
+	INNER JOIN tb_sys_moduleright mr ON m.moduleid=mr.moduleid
+	INNER JOIN tb_sys_roleright rl ON rl.moduleid=m.moduleid
+	INNER JOIN tb_sys_role r ON r.roleid=rl.roleid
+	WHERE m.state='0' AND m.moduletype='0'	
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sys_module
+    where moduleid = #{moduleid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sys_module
+    where moduleid = #{moduleid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Module" >
+    insert into tb_sys_module (moduleid, modulename, moduletype, 
+      state, url)
+    values (#{moduleid,jdbcType=INTEGER}, #{modulename,jdbcType=VARCHAR}, #{moduletype,jdbcType=TINYINT}, 
+      #{state,jdbcType=TINYINT}, #{url,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Module" >
+    insert into tb_sys_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="moduleid != null" >
+        moduleid,
+      </if>
+      <if test="modulename != null" >
+        modulename,
+      </if>
+      <if test="moduletype != null" >
+        moduletype,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="moduleid != null" >
+        #{moduleid,jdbcType=INTEGER},
+      </if>
+      <if test="modulename != null" >
+        #{modulename,jdbcType=VARCHAR},
+      </if>
+      <if test="moduletype != null" >
+        #{moduletype,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Module" >
+    update tb_sys_module
+    <set >
+      <if test="modulename != null" >
+        modulename = #{modulename,jdbcType=VARCHAR},
+      </if>
+      <if test="moduletype != null" >
+        moduletype = #{moduletype,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where moduleid = #{moduleid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Module" >
+    update tb_sys_module
+    set modulename = #{modulename,jdbcType=VARCHAR},
+      moduletype = #{moduletype,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT},
+      url = #{url,jdbcType=VARCHAR}
+    where moduleid = #{moduleid,jdbcType=INTEGER}
+  </update>
+</mapper>

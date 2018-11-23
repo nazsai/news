@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.LoginlogMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Loginlog" >
+    <id column="loginid" property="loginid" jdbcType="INTEGER" />
+    <result column="usercode" property="usercode" jdbcType="VARCHAR" />
+    <result column="ipaddr" property="ipaddr" jdbcType="VARCHAR" />
+    <result column="logindate" property="logindate" jdbcType="TIMESTAMP" />
+    <result column="logoutdate" property="logoutdate" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="errorcode" property="errorcode" jdbcType="VARCHAR" />
+    <result column="loginsource" property="loginsource" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    loginid, usercode, ipaddr, logindate, logoutdate, state, errorcode, loginsource
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sys_loginlog
+    where loginid = #{loginid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sys_loginlog
+    where loginid = #{loginid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Loginlog" >
+    insert into tb_sys_loginlog (loginid, usercode, ipaddr, 
+      logindate, logoutdate, state, 
+      errorcode, loginsource)
+    values (#{loginid,jdbcType=INTEGER}, #{usercode,jdbcType=VARCHAR}, #{ipaddr,jdbcType=VARCHAR}, 
+      #{logindate,jdbcType=TIMESTAMP}, #{logoutdate,jdbcType=TIMESTAMP}, #{state,jdbcType=TINYINT}, 
+      #{errorcode,jdbcType=VARCHAR}, #{loginsource,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Loginlog" >
+    insert into tb_sys_loginlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="loginid != null" >
+        loginid,
+      </if>
+      <if test="usercode != null" >
+        usercode,
+      </if>
+      <if test="ipaddr != null" >
+        ipaddr,
+      </if>
+      <if test="logindate != null" >
+        logindate,
+      </if>
+      <if test="logoutdate != null" >
+        logoutdate,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="errorcode != null" >
+        errorcode,
+      </if>
+      <if test="loginsource != null" >
+        loginsource,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="loginid != null" >
+        #{loginid,jdbcType=INTEGER},
+      </if>
+      <if test="usercode != null" >
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddr != null" >
+        #{ipaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="logindate != null" >
+        #{logindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logoutdate != null" >
+        #{logoutdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="errorcode != null" >
+        #{errorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="loginsource != null" >
+        #{loginsource,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Loginlog" >
+    update tb_sys_loginlog
+    <set >
+      <if test="usercode != null" >
+        usercode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddr != null" >
+        ipaddr = #{ipaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="logindate != null" >
+        logindate = #{logindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logoutdate != null" >
+        logoutdate = #{logoutdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="errorcode != null" >
+        errorcode = #{errorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="loginsource != null" >
+        loginsource = #{loginsource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where loginid = #{loginid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Loginlog" >
+    update tb_sys_loginlog
+    set usercode = #{usercode,jdbcType=VARCHAR},
+      ipaddr = #{ipaddr,jdbcType=VARCHAR},
+      logindate = #{logindate,jdbcType=TIMESTAMP},
+      logoutdate = #{logoutdate,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=TINYINT},
+      errorcode = #{errorcode,jdbcType=VARCHAR},
+      loginsource = #{loginsource,jdbcType=VARCHAR}
+    where loginid = #{loginid,jdbcType=INTEGER}
+  </update>
+</mapper>

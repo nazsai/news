@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.StatictypeMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Statictype" >
+    <id column="statictypeid" property="statictypeid" jdbcType="INTEGER" />
+    <result column="statictypename" property="statictypename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    statictypeid, statictypename
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sys_statictype
+    where statictypeid = #{statictypeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sys_statictype
+    where statictypeid = #{statictypeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Statictype" >
+    insert into tb_sys_statictype (statictypeid, statictypename)
+    values (#{statictypeid,jdbcType=INTEGER}, #{statictypename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Statictype" >
+    insert into tb_sys_statictype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="statictypeid != null" >
+        statictypeid,
+      </if>
+      <if test="statictypename != null" >
+        statictypename,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="statictypeid != null" >
+        #{statictypeid,jdbcType=INTEGER},
+      </if>
+      <if test="statictypename != null" >
+        #{statictypename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Statictype" >
+    update tb_sys_statictype
+    <set >
+      <if test="statictypename != null" >
+        statictypename = #{statictypename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where statictypeid = #{statictypeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Statictype" >
+    update tb_sys_statictype
+    set statictypename = #{statictypename,jdbcType=VARCHAR}
+    where statictypeid = #{statictypeid,jdbcType=INTEGER}
+  </update>
+</mapper>

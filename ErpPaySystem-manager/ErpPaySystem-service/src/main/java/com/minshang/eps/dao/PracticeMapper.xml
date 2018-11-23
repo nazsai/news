@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.PracticeMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Practice" >
+    <id column="practiceid" property="practiceid" jdbcType="INTEGER" />
+    <result column="practicename" property="practicename" jdbcType="VARCHAR" />
+    <result column="addpricetype" property="addpricetype" jdbcType="TINYINT" />
+    <result column="proportion" property="proportion" jdbcType="DOUBLE" />
+    <result column="fixprice" property="fixprice" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    practiceid, practicename, addpricetype, proportion, fixprice
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_practice
+    where practiceid = #{practiceid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_practice
+    where practiceid = #{practiceid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Practice" >
+    insert into tb_dini_practice (practiceid, practicename, addpricetype, 
+      proportion, fixprice)
+    values (#{practiceid,jdbcType=INTEGER}, #{practicename,jdbcType=VARCHAR}, #{addpricetype,jdbcType=TINYINT}, 
+      #{proportion,jdbcType=DOUBLE}, #{fixprice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Practice" >
+    insert into tb_dini_practice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="practiceid != null" >
+        practiceid,
+      </if>
+      <if test="practicename != null" >
+        practicename,
+      </if>
+      <if test="addpricetype != null" >
+        addpricetype,
+      </if>
+      <if test="proportion != null" >
+        proportion,
+      </if>
+      <if test="fixprice != null" >
+        fixprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="practiceid != null" >
+        #{practiceid,jdbcType=INTEGER},
+      </if>
+      <if test="practicename != null" >
+        #{practicename,jdbcType=VARCHAR},
+      </if>
+      <if test="addpricetype != null" >
+        #{addpricetype,jdbcType=TINYINT},
+      </if>
+      <if test="proportion != null" >
+        #{proportion,jdbcType=DOUBLE},
+      </if>
+      <if test="fixprice != null" >
+        #{fixprice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Practice" >
+    update tb_dini_practice
+    <set >
+      <if test="practicename != null" >
+        practicename = #{practicename,jdbcType=VARCHAR},
+      </if>
+      <if test="addpricetype != null" >
+        addpricetype = #{addpricetype,jdbcType=TINYINT},
+      </if>
+      <if test="proportion != null" >
+        proportion = #{proportion,jdbcType=DOUBLE},
+      </if>
+      <if test="fixprice != null" >
+        fixprice = #{fixprice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where practiceid = #{practiceid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Practice" >
+    update tb_dini_practice
+    set practicename = #{practicename,jdbcType=VARCHAR},
+      addpricetype = #{addpricetype,jdbcType=TINYINT},
+      proportion = #{proportion,jdbcType=DOUBLE},
+      fixprice = #{fixprice,jdbcType=DOUBLE}
+    where practiceid = #{practiceid,jdbcType=INTEGER}
+  </update>
+</mapper>

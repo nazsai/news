@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.AreaMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.vo.AreaVo" >
+    <id column="areaid" property="areaid" jdbcType="INTEGER" />
+    <result column="areaname" property="areaname" jdbcType="VARCHAR" />
+    <result column="dcname" property="dcname" jdbcType="VARCHAR" />
+    <result column="brandid" property="brandid" jdbcType="INTEGER" />
+    <result column="brandname" property="brandname" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    areaid, areaname, brandid, userid, createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_area
+    where areaid = #{areaid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_area
+    where areaid = #{areaid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Area" >
+    insert into tb_dini_area (areaid, areaname, brandid, 
+      userid, createtime)
+    values (#{areaid,jdbcType=INTEGER}, #{areaname,jdbcType=VARCHAR}, #{brandid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.vo.AreaVo" >
+    insert into tb_dini_area
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="areaid != null" >
+        areaid,
+      </if>
+      <if test="areaname != null" >
+        areaname,
+      </if>
+      <if test="brandid != null" >
+        brandid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="areaid != null" >
+        #{areaid,jdbcType=INTEGER},
+      </if>
+      <if test="areaname != null" >
+        #{areaname,jdbcType=VARCHAR},
+      </if>
+      <if test="brandid != null" >
+        #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.vo.AreaVo" >
+    update tb_dini_area
+    <set >
+      <if test="areaname != null" >
+        areaname = #{areaname,jdbcType=VARCHAR},
+      </if>
+      <if test="brandid != null" >
+        brandid = #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where areaid = #{areaid,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.vo.AreaVo" >
+    update tb_dini_area
+    set areaname = #{areaname,jdbcType=VARCHAR},
+      brandid = #{brandid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where areaid = #{areaid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="pageFind" resultMap="BaseResultMap">
+  	SELECT a.areaid,a.areaname,b.brandname,i.industryname,u.username,a.createtime
+	FROM tb_dini_area a , tb_dini_brand b , tb_sys_user u , tb_dini_industry i
+	WHERE a.brandid = b.brandid AND a.userid = u.userid AND b.industryid = i.industryid
+	<if test="areaVo.brandname!=null and areaVo.brandname!=''">
+		AND b.brandname LIKE '%${areaVo.brandname }%'
+	</if>
+	<if test="areaVo.brandname!=null and areaVo.brandname!=''">
+		AND a.areaname LIKE '%${areaVo.areaname }%'
+	</if>
+	LIMIT ${(currPage-1)*pageSize},${pageSize}
+  </select>
+  
+  <select id="pageFindCount" resultType="int">
+  	SELECT COUNT(*)
+	FROM tb_dini_area a , tb_dini_brand b
+	<if test="areaVo.brandname!=null and areaVo.brandname!=''">
+		WHERE b.brandname LIKE '%${areaVo.brandname }%'
+	</if>
+	<if test="areaVo.brandname!=null and areaVo.brandname!=''">
+		AND a.areaname LIKE '%${areaVo.areaname }%'
+	</if>
+  </select>
+  
+  <insert id="addArea" parameterType="com.minshang.eps.vo.AreaVo">
+  	INSERT INTO tb_dini_area VALUES(null,#{areaname},#{brandid},#{userid},NOW())
+  </insert>
+  
+  
+</mapper>

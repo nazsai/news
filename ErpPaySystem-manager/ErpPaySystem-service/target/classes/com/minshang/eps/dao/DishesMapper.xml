@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.DishesMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Dishes" >
+    <id column="dishesid" property="dishesid" jdbcType="INTEGER" />
+    <result column="dishesname" property="dishesname" jdbcType="VARCHAR" />
+    <result column="dishestypeid" property="dishestypeid" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="memberprice" property="memberprice" jdbcType="DOUBLE" />
+    <result column="unit" property="unit" jdbcType="INTEGER" />
+    <result column="spellremember" property="spellremember" jdbcType="VARCHAR" />
+    <result column="numremember" property="numremember" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="weigth" property="weigth" jdbcType="TINYINT" />
+    <result column="recommend" property="recommend" jdbcType="TINYINT" />
+    <result column="hot" property="hot" jdbcType="TINYINT" />
+    <result column="nowprice" property="nowprice" jdbcType="TINYINT" />
+    <result column="pushmoney" property="pushmoney" jdbcType="TINYINT" />
+    <result column="pushtype" property="pushtype" jdbcType="TINYINT" />
+    <result column="fixmoney" property="fixmoney" jdbcType="DOUBLE" />
+    <result column="proportion" property="proportion" jdbcType="DOUBLE" />
+    <result column="cost" property="cost" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dishesid, dishesname, dishestypeid, price, memberprice, unit, spellremember, numremember, 
+    state, weigth, recommend, hot, nowprice, pushmoney, pushtype, fixmoney, proportion, 
+    cost
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_dishes
+    where dishesid = #{dishesid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_dishes
+    where dishesid = #{dishesid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Dishes" >
+    insert into tb_dini_dishes (dishesid, dishesname, dishestypeid, 
+      price, memberprice, unit, 
+      spellremember, numremember, state, 
+      weigth, recommend, hot, 
+      nowprice, pushmoney, pushtype, 
+      fixmoney, proportion, cost
+      )
+    values (#{dishesid,jdbcType=INTEGER}, #{dishesname,jdbcType=VARCHAR}, #{dishestypeid,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE}, #{memberprice,jdbcType=DOUBLE}, #{unit,jdbcType=INTEGER}, 
+      #{spellremember,jdbcType=VARCHAR}, #{numremember,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, 
+      #{weigth,jdbcType=TINYINT}, #{recommend,jdbcType=TINYINT}, #{hot,jdbcType=TINYINT}, 
+      #{nowprice,jdbcType=TINYINT}, #{pushmoney,jdbcType=TINYINT}, #{pushtype,jdbcType=TINYINT}, 
+      #{fixmoney,jdbcType=DOUBLE}, #{proportion,jdbcType=DOUBLE}, #{cost,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Dishes" >
+    insert into tb_dini_dishes
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dishesid != null" >
+        dishesid,
+      </if>
+      <if test="dishesname != null" >
+        dishesname,
+      </if>
+      <if test="dishestypeid != null" >
+        dishestypeid,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="memberprice != null" >
+        memberprice,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="spellremember != null" >
+        spellremember,
+      </if>
+      <if test="numremember != null" >
+        numremember,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="weigth != null" >
+        weigth,
+      </if>
+      <if test="recommend != null" >
+        recommend,
+      </if>
+      <if test="hot != null" >
+        hot,
+      </if>
+      <if test="nowprice != null" >
+        nowprice,
+      </if>
+      <if test="pushmoney != null" >
+        pushmoney,
+      </if>
+      <if test="pushtype != null" >
+        pushtype,
+      </if>
+      <if test="fixmoney != null" >
+        fixmoney,
+      </if>
+      <if test="proportion != null" >
+        proportion,
+      </if>
+      <if test="cost != null" >
+        cost,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dishesid != null" >
+        #{dishesid,jdbcType=INTEGER},
+      </if>
+      <if test="dishesname != null" >
+        #{dishesname,jdbcType=VARCHAR},
+      </if>
+      <if test="dishestypeid != null" >
+        #{dishestypeid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="memberprice != null" >
+        #{memberprice,jdbcType=DOUBLE},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=INTEGER},
+      </if>
+      <if test="spellremember != null" >
+        #{spellremember,jdbcType=VARCHAR},
+      </if>
+      <if test="numremember != null" >
+        #{numremember,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="weigth != null" >
+        #{weigth,jdbcType=TINYINT},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=TINYINT},
+      </if>
+      <if test="hot != null" >
+        #{hot,jdbcType=TINYINT},
+      </if>
+      <if test="nowprice != null" >
+        #{nowprice,jdbcType=TINYINT},
+      </if>
+      <if test="pushmoney != null" >
+        #{pushmoney,jdbcType=TINYINT},
+      </if>
+      <if test="pushtype != null" >
+        #{pushtype,jdbcType=TINYINT},
+      </if>
+      <if test="fixmoney != null" >
+        #{fixmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="proportion != null" >
+        #{proportion,jdbcType=DOUBLE},
+      </if>
+      <if test="cost != null" >
+        #{cost,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Dishes" >
+    update tb_dini_dishes
+    <set >
+      <if test="dishesname != null" >
+        dishesname = #{dishesname,jdbcType=VARCHAR},
+      </if>
+      <if test="dishestypeid != null" >
+        dishestypeid = #{dishestypeid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="memberprice != null" >
+        memberprice = #{memberprice,jdbcType=DOUBLE},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=INTEGER},
+      </if>
+      <if test="spellremember != null" >
+        spellremember = #{spellremember,jdbcType=VARCHAR},
+      </if>
+      <if test="numremember != null" >
+        numremember = #{numremember,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="weigth != null" >
+        weigth = #{weigth,jdbcType=TINYINT},
+      </if>
+      <if test="recommend != null" >
+        recommend = #{recommend,jdbcType=TINYINT},
+      </if>
+      <if test="hot != null" >
+        hot = #{hot,jdbcType=TINYINT},
+      </if>
+      <if test="nowprice != null" >
+        nowprice = #{nowprice,jdbcType=TINYINT},
+      </if>
+      <if test="pushmoney != null" >
+        pushmoney = #{pushmoney,jdbcType=TINYINT},
+      </if>
+      <if test="pushtype != null" >
+        pushtype = #{pushtype,jdbcType=TINYINT},
+      </if>
+      <if test="fixmoney != null" >
+        fixmoney = #{fixmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="proportion != null" >
+        proportion = #{proportion,jdbcType=DOUBLE},
+      </if>
+      <if test="cost != null" >
+        cost = #{cost,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where dishesid = #{dishesid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Dishes" >
+    update tb_dini_dishes
+    set dishesname = #{dishesname,jdbcType=VARCHAR},
+      dishestypeid = #{dishestypeid,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      memberprice = #{memberprice,jdbcType=DOUBLE},
+      unit = #{unit,jdbcType=INTEGER},
+      spellremember = #{spellremember,jdbcType=VARCHAR},
+      numremember = #{numremember,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      weigth = #{weigth,jdbcType=TINYINT},
+      recommend = #{recommend,jdbcType=TINYINT},
+      hot = #{hot,jdbcType=TINYINT},
+      nowprice = #{nowprice,jdbcType=TINYINT},
+      pushmoney = #{pushmoney,jdbcType=TINYINT},
+      pushtype = #{pushtype,jdbcType=TINYINT},
+      fixmoney = #{fixmoney,jdbcType=DOUBLE},
+      proportion = #{proportion,jdbcType=DOUBLE},
+      cost = #{cost,jdbcType=DOUBLE}
+    where dishesid = #{dishesid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.DishesrightMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Dishesright" >
+    <id column="rightid" property="rightid" jdbcType="INTEGER" />
+    <result column="dishesdepotid" property="dishesdepotid" jdbcType="INTEGER" />
+    <result column="disheid" property="disheid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rightid, dishesdepotid, disheid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_dishesright
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_dishesright
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Dishesright" >
+    insert into tb_dini_dishesright (rightid, dishesdepotid, disheid
+      )
+    values (#{rightid,jdbcType=INTEGER}, #{dishesdepotid,jdbcType=INTEGER}, #{disheid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Dishesright" >
+    insert into tb_dini_dishesright
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rightid != null" >
+        rightid,
+      </if>
+      <if test="dishesdepotid != null" >
+        dishesdepotid,
+      </if>
+      <if test="disheid != null" >
+        disheid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rightid != null" >
+        #{rightid,jdbcType=INTEGER},
+      </if>
+      <if test="dishesdepotid != null" >
+        #{dishesdepotid,jdbcType=INTEGER},
+      </if>
+      <if test="disheid != null" >
+        #{disheid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Dishesright" >
+    update tb_dini_dishesright
+    <set >
+      <if test="dishesdepotid != null" >
+        dishesdepotid = #{dishesdepotid,jdbcType=INTEGER},
+      </if>
+      <if test="disheid != null" >
+        disheid = #{disheid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Dishesright" >
+    update tb_dini_dishesright
+    set dishesdepotid = #{dishesdepotid,jdbcType=INTEGER},
+      disheid = #{disheid,jdbcType=INTEGER}
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </update>
+</mapper>

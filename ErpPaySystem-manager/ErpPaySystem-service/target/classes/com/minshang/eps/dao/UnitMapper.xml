@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.UnitMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Unit" >
+    <id column="unitid" property="unitid" jdbcType="INTEGER" />
+    <result column="unitname" property="unitname" jdbcType="VARCHAR" />
+    <result column="unitcode" property="unitcode" jdbcType="VARCHAR" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    unitid, unitname, unitcode, createuser, createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_unit
+    where unitid = #{unitid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_unit
+    where unitid = #{unitid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Unit" >
+    insert into tb_dini_unit (unitid, unitname, unitcode, 
+      createuser, createtime)
+    values (#{unitid,jdbcType=INTEGER}, #{unitname,jdbcType=VARCHAR}, #{unitcode,jdbcType=VARCHAR}, 
+      #{createuser,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Unit" >
+    insert into tb_dini_unit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="unitid != null" >
+        unitid,
+      </if>
+      <if test="unitname != null" >
+        unitname,
+      </if>
+      <if test="unitcode != null" >
+        unitcode,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="unitid != null" >
+        #{unitid,jdbcType=INTEGER},
+      </if>
+      <if test="unitname != null" >
+        #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="unitcode != null" >
+        #{unitcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Unit" >
+    update tb_dini_unit
+    <set >
+      <if test="unitname != null" >
+        unitname = #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="unitcode != null" >
+        unitcode = #{unitcode,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where unitid = #{unitid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Unit" >
+    update tb_dini_unit
+    set unitname = #{unitname,jdbcType=VARCHAR},
+      unitcode = #{unitcode,jdbcType=VARCHAR},
+      createuser = #{createuser,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where unitid = #{unitid,jdbcType=INTEGER}
+  </update>
+</mapper>

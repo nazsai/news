@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.IndustryMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Industry" >
+    <id column="industryid" property="industryid" jdbcType="INTEGER" />
+    <result column="industryname" property="industryname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    industryid, industryname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_industry
+    where industryid = #{industryid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_industry
+    where industryid = #{industryid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Industry" >
+    insert into tb_dini_industry (industryid, industryname)
+    values (#{industryid,jdbcType=INTEGER}, #{industryname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Industry" >
+    insert into tb_dini_industry
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="industryid != null" >
+        industryid,
+      </if>
+      <if test="industryname != null" >
+        industryname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="industryid != null" >
+        #{industryid,jdbcType=INTEGER},
+      </if>
+      <if test="industryname != null" >
+        #{industryname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Industry" >
+    update tb_dini_industry
+    <set >
+      <if test="industryname != null" >
+        industryname = #{industryname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where industryid = #{industryid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Industry" >
+    update tb_dini_industry
+    set industryname = #{industryname,jdbcType=VARCHAR}
+    where industryid = #{industryid,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="findList" resultMap="BaseResultMap">
+  	SELECT * FROM tb_dini_industry
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</mapper>

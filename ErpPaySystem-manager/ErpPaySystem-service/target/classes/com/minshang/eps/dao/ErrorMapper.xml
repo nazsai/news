@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.ErrorMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Error" >
+    <id column="errorcode" property="errorcode" jdbcType="VARCHAR" />
+    <result column="errorlvl" property="errorlvl" jdbcType="VARCHAR" />
+    <result column="errormsg" property="errormsg" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    errorcode, errorlvl, errormsg, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sys_error
+    where errorcode = #{errorcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_sys_error
+    where errorcode = #{errorcode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Error" >
+    insert into tb_sys_error (errorcode, errorlvl, errormsg, 
+      remark)
+    values (#{errorcode,jdbcType=VARCHAR}, #{errorlvl,jdbcType=VARCHAR}, #{errormsg,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Error" >
+    insert into tb_sys_error
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="errorcode != null" >
+        errorcode,
+      </if>
+      <if test="errorlvl != null" >
+        errorlvl,
+      </if>
+      <if test="errormsg != null" >
+        errormsg,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="errorcode != null" >
+        #{errorcode,jdbcType=VARCHAR},
+      </if>
+      <if test="errorlvl != null" >
+        #{errorlvl,jdbcType=VARCHAR},
+      </if>
+      <if test="errormsg != null" >
+        #{errormsg,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Error" >
+    update tb_sys_error
+    <set >
+      <if test="errorlvl != null" >
+        errorlvl = #{errorlvl,jdbcType=VARCHAR},
+      </if>
+      <if test="errormsg != null" >
+        errormsg = #{errormsg,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where errorcode = #{errorcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Error" >
+    update tb_sys_error
+    set errorlvl = #{errorlvl,jdbcType=VARCHAR},
+      errormsg = #{errormsg,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where errorcode = #{errorcode,jdbcType=VARCHAR}
+  </update>
+</mapper>

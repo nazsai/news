@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Goods" >
+    <id column="goodsid" property="goodsid" jdbcType="INTEGER" />
+    <result column="goodsname" property="goodsname" jdbcType="VARCHAR" />
+    <result column="goodscode" property="goodscode" jdbcType="VARCHAR" />
+    <result column="goodstypeid" property="goodstypeid" jdbcType="INTEGER" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="unitid" property="unitid" jdbcType="INTEGER" />
+    <result column="minstore" property="minstore" jdbcType="INTEGER" />
+    <result column="maxstore" property="maxstore" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goodsid, goodsname, goodscode, goodstypeid, size, unitid, minstore, maxstore, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_goods
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_goods
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Goods" >
+    insert into tb_dini_goods (goodsid, goodsname, goodscode, 
+      goodstypeid, size, unitid, 
+      minstore, maxstore, state
+      )
+    values (#{goodsid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{goodscode,jdbcType=VARCHAR}, 
+      #{goodstypeid,jdbcType=INTEGER}, #{size,jdbcType=VARCHAR}, #{unitid,jdbcType=INTEGER}, 
+      #{minstore,jdbcType=INTEGER}, #{maxstore,jdbcType=INTEGER}, #{state,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Goods" >
+    insert into tb_dini_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsid != null" >
+        goodsid,
+      </if>
+      <if test="goodsname != null" >
+        goodsname,
+      </if>
+      <if test="goodscode != null" >
+        goodscode,
+      </if>
+      <if test="goodstypeid != null" >
+        goodstypeid,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="unitid != null" >
+        unitid,
+      </if>
+      <if test="minstore != null" >
+        minstore,
+      </if>
+      <if test="maxstore != null" >
+        maxstore,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodscode != null" >
+        #{goodscode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstypeid != null" >
+        #{goodstypeid,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null" >
+        #{unitid,jdbcType=INTEGER},
+      </if>
+      <if test="minstore != null" >
+        #{minstore,jdbcType=INTEGER},
+      </if>
+      <if test="maxstore != null" >
+        #{maxstore,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Goods" >
+    update tb_dini_goods
+    <set >
+      <if test="goodsname != null" >
+        goodsname = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodscode != null" >
+        goodscode = #{goodscode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstypeid != null" >
+        goodstypeid = #{goodstypeid,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="unitid != null" >
+        unitid = #{unitid,jdbcType=INTEGER},
+      </if>
+      <if test="minstore != null" >
+        minstore = #{minstore,jdbcType=INTEGER},
+      </if>
+      <if test="maxstore != null" >
+        maxstore = #{maxstore,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+    </set>
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Goods" >
+    update tb_dini_goods
+    set goodsname = #{goodsname,jdbcType=VARCHAR},
+      goodscode = #{goodscode,jdbcType=VARCHAR},
+      goodstypeid = #{goodstypeid,jdbcType=INTEGER},
+      size = #{size,jdbcType=VARCHAR},
+      unitid = #{unitid,jdbcType=INTEGER},
+      minstore = #{minstore,jdbcType=INTEGER},
+      maxstore = #{maxstore,jdbcType=INTEGER},
+      state = #{state,jdbcType=TINYINT}
+    where goodsid = #{goodsid,jdbcType=INTEGER}
+  </update>
+</mapper>

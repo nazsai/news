@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.GoodstypeMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Goodstype" >
+    <id column="goodstypeid" property="goodstypeid" jdbcType="INTEGER" />
+    <result column="goodstypename" property="goodstypename" jdbcType="VARCHAR" />
+    <result column="goodstypecode" property="goodstypecode" jdbcType="VARCHAR" />
+    <result column="parentgoodstypeid" property="parentgoodstypeid" jdbcType="INTEGER" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goodstypeid, goodstypename, goodstypecode, parentgoodstypeid, createuser, createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_goodstype
+    where goodstypeid = #{goodstypeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_goodstype
+    where goodstypeid = #{goodstypeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Goodstype" >
+    insert into tb_dini_goodstype (goodstypeid, goodstypename, goodstypecode, 
+      parentgoodstypeid, createuser, createtime
+      )
+    values (#{goodstypeid,jdbcType=INTEGER}, #{goodstypename,jdbcType=VARCHAR}, #{goodstypecode,jdbcType=VARCHAR}, 
+      #{parentgoodstypeid,jdbcType=INTEGER}, #{createuser,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Goodstype" >
+    insert into tb_dini_goodstype
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodstypeid != null" >
+        goodstypeid,
+      </if>
+      <if test="goodstypename != null" >
+        goodstypename,
+      </if>
+      <if test="goodstypecode != null" >
+        goodstypecode,
+      </if>
+      <if test="parentgoodstypeid != null" >
+        parentgoodstypeid,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodstypeid != null" >
+        #{goodstypeid,jdbcType=INTEGER},
+      </if>
+      <if test="goodstypename != null" >
+        #{goodstypename,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstypecode != null" >
+        #{goodstypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentgoodstypeid != null" >
+        #{parentgoodstypeid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Goodstype" >
+    update tb_dini_goodstype
+    <set >
+      <if test="goodstypename != null" >
+        goodstypename = #{goodstypename,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstypecode != null" >
+        goodstypecode = #{goodstypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentgoodstypeid != null" >
+        parentgoodstypeid = #{parentgoodstypeid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where goodstypeid = #{goodstypeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Goodstype" >
+    update tb_dini_goodstype
+    set goodstypename = #{goodstypename,jdbcType=VARCHAR},
+      goodstypecode = #{goodstypecode,jdbcType=VARCHAR},
+      parentgoodstypeid = #{parentgoodstypeid,jdbcType=INTEGER},
+      createuser = #{createuser,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where goodstypeid = #{goodstypeid,jdbcType=INTEGER}
+  </update>
+</mapper>

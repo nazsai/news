@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.SectionMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.vo.SectionVo" >
+    <id column="sectionid" property="sectionid" jdbcType="INTEGER" />
+    <result column="sectionname" property="sectionname" jdbcType="VARCHAR" />
+    <result column="orgid" property="orgid" jdbcType="INTEGER" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+     <result column="companyname" property="companyname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sectionid, sectionname, orgid, createuser, createtime, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_section
+    where sectionid = #{sectionid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  	DELETE FROM tb_dini_section 
+	WHERE sectionid =  #{sectionid,jdbcType=INTEGER}	
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.vo.SectionVo" >
+    insert into tb_dini_section (sectionid, sectionname, orgid, 
+      createuser, createtime, state,companyid,companyname
+      )
+    values (#{sectionid,jdbcType=INTEGER}, #{sectionname,jdbcType=VARCHAR}, #{orgid,jdbcType=INTEGER}, 
+      #{createuser,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{state,jdbcType=TINYINT},
+      #{companyid,jdbcType=INTEGER}, #{companyname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.vo.SectionVo" >
+    insert into tb_dini_section
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sectionid != null" >
+        sectionid,
+      </if>
+      <if test="sectionname != null" >
+        sectionname,
+      </if>
+      <if test="orgid != null" >
+        orgid,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="companyid != null" >
+        companyid,
+      </if>
+      <if test="companyname != null" >
+        companyname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sectionid != null" >
+        #{sectionid,jdbcType=INTEGER},
+      </if>
+      <if test="sectionname != null" >
+        #{sectionname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.vo.SectionVo" >
+    update tb_dini_section
+    <set >
+      <if test="sectionname != null" >
+        sectionname = #{sectionname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        orgid = #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+    </set>
+    where sectionid = #{sectionid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.vo.SectionVo" >
+	update tb_dini_section
+	set sectionname = #{sectionname,jdbcType=VARCHAR},
+	orgid = #{orgid,jdbcType=INTEGER},
+	createuser = #{createuser,jdbcType=INTEGER},
+	createtime = #{createtime,jdbcType=TIMESTAMP},
+	state = #{state,jdbcType=TINYINT}
+	where sectionid = #{sectionid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="pageFind" resultMap="BaseResultMap" parameterType="com.minshang.eps.vo.SectionVo">
+  		SELECT s.*,c.companyname
+		from tb_dini_section s , tb_dini_company c 
+		WHERE s.companyid = c.companyid
+	<if test="vo.companyname!=null and vo.companyname!=''">
+		AND c.companyname LIKE '%${vo.companyname}%'
+	</if>
+		LIMIT ${(currPage-1)*pageSize},${pageSize}
+  </select>
+  
+  <select id="pageFindCount" resultType="Integer">
+ 		SELECT count(*) FROM tb_dini_section	
+	<if test="vo.sectionname!=null and vo.sectionname!=''">
+		AND sectionname LIKE '%${vo.sectionname}%'
+	</if>
+  </select>
+
+  <!-- <insert id="addSectionVo" parameterType="com.minshang.eps.vo.SectionVo">
+  		INSERT into tb_dini_section VALUES(null,#{sectionname},NULL,NULL,null,NULL,null,#{companyname})
+  </insert> -->
+  
+  <update id="updateStateById" parameterType="com.minshang.eps.vo.SectionVo">
+  		UPDATE tb_dini_section `state` = #{state}
+		WHERE sectionid = #{sectionid}
+  </update>
+  
+  <select id="getCountBySectionname" resultType="Integer" parameterType="com.minshang.eps.vo.SectionVo">
+  		SELECT  count(*) FROM tb_dini_section 
+		WHERE sectionname = #{sectionname}
+		AND `state`= 0
+  </select>
+
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.ModulerightMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Moduleright" >
+    <id column="modulerightid" property="modulerightid" jdbcType="INTEGER" />
+    <result column="moduleid" property="moduleid" jdbcType="INTEGER" />
+    <result column="parentid" property="parentid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    modulerightid, moduleid, parentid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sys_moduleright
+    where modulerightid = #{modulerightid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sys_moduleright
+    where modulerightid = #{modulerightid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Moduleright" >
+    insert into tb_sys_moduleright (modulerightid, moduleid, parentid
+      )
+    values (#{modulerightid,jdbcType=INTEGER}, #{moduleid,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Moduleright" >
+    insert into tb_sys_moduleright
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modulerightid != null" >
+        modulerightid,
+      </if>
+      <if test="moduleid != null" >
+        moduleid,
+      </if>
+      <if test="parentid != null" >
+        parentid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modulerightid != null" >
+        #{modulerightid,jdbcType=INTEGER},
+      </if>
+      <if test="moduleid != null" >
+        #{moduleid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Moduleright" >
+    update tb_sys_moduleright
+    <set >
+      <if test="moduleid != null" >
+        moduleid = #{moduleid,jdbcType=INTEGER},
+      </if>
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where modulerightid = #{modulerightid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Moduleright" >
+    update tb_sys_moduleright
+    set moduleid = #{moduleid,jdbcType=INTEGER},
+      parentid = #{parentid,jdbcType=INTEGER}
+    where modulerightid = #{modulerightid,jdbcType=INTEGER}
+  </update>
+</mapper>

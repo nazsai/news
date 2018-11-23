@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 配置数据库连接配置文件 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+	    <property name="locations"> 
+	        <array>  
+	            <value>classpath:jdbc.properties</value>  
+	        </array>  
+	    </property>  
+	</bean>
+     
+     <!-- 配置数据源 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" 
+			  init-method="init" destroy-method="close"> 
+		  <property name="driverClassName" value="${jdbc.driverClassName}" /> 
+		  <property name="url" value="${jdbc.url}" /> 
+		  <property name="username" value="${jdbc.username}" /> 
+		  <property name="password" value="${jdbc.password}" /> 
+    </bean>
+	
+	<!-- 管理sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	  	<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- mapper.xml和mapper接口自动映射 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	  <!-- value为mapper接口及mapper.xml所在包 -->
+	  <property name="basePackage" value="com.minshang.eps.dao" />
+	</bean>
+	
+	
+	<!-- 自动扫描 -->
+    <context:component-scan base-package="com.minshang.eps.service.*,com.minshang.eps.util"/>
+
+	<!-- 声明平台事务的管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- 声明事务管理器 管理事务的规则-->
+	<tx:advice id="myAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="find*" propagation="NOT_SUPPORTED" read-only="true"/>
+			<tx:method name="del*" propagation="REQUIRED"/>
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="update*"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 把事务管理的规则添加到自定义的切面上 -->
+	<aop:config>
+		<aop:pointcut id="myPointcut" expression="execution(* com.minshang.eps.service..*.*(..))"/>
+		<aop:advisor advice-ref="myAdvice" pointcut-ref="myPointcut"/>
+	</aop:config>
+	
+	<bean class="com.minshang.eps.util.DataUtil" init-method="init"></bean>
+</beans>

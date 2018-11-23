@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.ShopmoudleMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Shopmoudle" >
+    <id column="shopmoudleid" property="shopmoudleid" jdbcType="INTEGER" />
+    <result column="shopmoudlename" property="shopmoudlename" jdbcType="VARCHAR" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="modifytime" property="modifytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    shopmoudleid, shopmoudlename, createuser, createdate, modifytime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_shopmoudle
+    where shopmoudleid = #{shopmoudleid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_shopmoudle
+    where shopmoudleid = #{shopmoudleid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Shopmoudle" >
+    insert into tb_dini_shopmoudle (shopmoudleid, shopmoudlename, createuser, 
+      createdate, modifytime)
+    values (#{shopmoudleid,jdbcType=INTEGER}, #{shopmoudlename,jdbcType=VARCHAR}, #{createuser,jdbcType=INTEGER}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{modifytime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Shopmoudle" >
+    insert into tb_dini_shopmoudle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopmoudleid != null" >
+        shopmoudleid,
+      </if>
+      <if test="shopmoudlename != null" >
+        shopmoudlename,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="modifytime != null" >
+        modifytime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopmoudleid != null" >
+        #{shopmoudleid,jdbcType=INTEGER},
+      </if>
+      <if test="shopmoudlename != null" >
+        #{shopmoudlename,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifytime != null" >
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Shopmoudle" >
+    update tb_dini_shopmoudle
+    <set >
+      <if test="shopmoudlename != null" >
+        shopmoudlename = #{shopmoudlename,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifytime != null" >
+        modifytime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where shopmoudleid = #{shopmoudleid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Shopmoudle" >
+    update tb_dini_shopmoudle
+    set shopmoudlename = #{shopmoudlename,jdbcType=VARCHAR},
+      createuser = #{createuser,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      modifytime = #{modifytime,jdbcType=TIMESTAMP}
+    where shopmoudleid = #{shopmoudleid,jdbcType=INTEGER}
+  </update>
+</mapper>

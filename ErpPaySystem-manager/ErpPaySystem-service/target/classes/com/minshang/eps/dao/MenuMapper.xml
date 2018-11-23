@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Menu" >
+    <id column="menuid" property="menuid" jdbcType="INTEGER" />
+    <result column="dishesdepotid" property="dishesdepotid" jdbcType="INTEGER" />
+    <result column="menuname" property="menuname" jdbcType="VARCHAR" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="taketime" property="taketime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    menuid, dishesdepotid, menuname, createuser, createtime, taketime, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_menu
+    where menuid = #{menuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_menu
+    where menuid = #{menuid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Menu" >
+    insert into tb_dini_menu (menuid, dishesdepotid, menuname, 
+      createuser, createtime, taketime, 
+      state)
+    values (#{menuid,jdbcType=INTEGER}, #{dishesdepotid,jdbcType=INTEGER}, #{menuname,jdbcType=VARCHAR}, 
+      #{createuser,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{taketime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Menu" >
+    insert into tb_dini_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuid != null" >
+        menuid,
+      </if>
+      <if test="dishesdepotid != null" >
+        dishesdepotid,
+      </if>
+      <if test="menuname != null" >
+        menuname,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="taketime != null" >
+        taketime,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuid != null" >
+        #{menuid,jdbcType=INTEGER},
+      </if>
+      <if test="dishesdepotid != null" >
+        #{dishesdepotid,jdbcType=INTEGER},
+      </if>
+      <if test="menuname != null" >
+        #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taketime != null" >
+        #{taketime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Menu" >
+    update tb_dini_menu
+    <set >
+      <if test="dishesdepotid != null" >
+        dishesdepotid = #{dishesdepotid,jdbcType=INTEGER},
+      </if>
+      <if test="menuname != null" >
+        menuname = #{menuname,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taketime != null" >
+        taketime = #{taketime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+    </set>
+    where menuid = #{menuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Menu" >
+    update tb_dini_menu
+    set dishesdepotid = #{dishesdepotid,jdbcType=INTEGER},
+      menuname = #{menuname,jdbcType=VARCHAR},
+      createuser = #{createuser,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      taketime = #{taketime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=TINYINT}
+    where menuid = #{menuid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.SizerightMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Sizeright" >
+    <id column="rightid" property="rightid" jdbcType="INTEGER" />
+    <result column="dishesid" property="dishesid" jdbcType="INTEGER" />
+    <result column="sizeid" property="sizeid" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="memberprice" property="memberprice" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rightid, dishesid, sizeid, price, memberprice
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_sizeright
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_sizeright
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Sizeright" >
+    insert into tb_dini_sizeright (rightid, dishesid, sizeid, 
+      price, memberprice)
+    values (#{rightid,jdbcType=INTEGER}, #{dishesid,jdbcType=INTEGER}, #{sizeid,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE}, #{memberprice,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Sizeright" >
+    insert into tb_dini_sizeright
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rightid != null" >
+        rightid,
+      </if>
+      <if test="dishesid != null" >
+        dishesid,
+      </if>
+      <if test="sizeid != null" >
+        sizeid,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="memberprice != null" >
+        memberprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rightid != null" >
+        #{rightid,jdbcType=INTEGER},
+      </if>
+      <if test="dishesid != null" >
+        #{dishesid,jdbcType=INTEGER},
+      </if>
+      <if test="sizeid != null" >
+        #{sizeid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="memberprice != null" >
+        #{memberprice,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Sizeright" >
+    update tb_dini_sizeright
+    <set >
+      <if test="dishesid != null" >
+        dishesid = #{dishesid,jdbcType=INTEGER},
+      </if>
+      <if test="sizeid != null" >
+        sizeid = #{sizeid,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="memberprice != null" >
+        memberprice = #{memberprice,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Sizeright" >
+    update tb_dini_sizeright
+    set dishesid = #{dishesid,jdbcType=INTEGER},
+      sizeid = #{sizeid,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      memberprice = #{memberprice,jdbcType=DOUBLE}
+    where rightid = #{rightid,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteBySizeid" parameterType="int">
+  	delete from tb_dini_sizeright where sizeid=#{sizeid}
+  </delete>
+</mapper>

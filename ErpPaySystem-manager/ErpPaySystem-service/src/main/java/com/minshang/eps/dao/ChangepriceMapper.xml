@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.ChangepriceMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Changeprice" >
+    <id column="changepriceid" property="changepriceid" jdbcType="INTEGER" />
+    <result column="menuid" property="menuid" jdbcType="INTEGER" />
+    <result column="dishesid" property="dishesid" jdbcType="INTEGER" />
+    <result column="orgprice" property="orgprice" jdbcType="DOUBLE" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="orgmemberprice" property="orgmemberprice" jdbcType="DOUBLE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    changepriceid, menuid, dishesid, orgprice, price, orgmemberprice, remark, createuser, 
+    createtime, starttime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_changeprice
+    where changepriceid = #{changepriceid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_changeprice
+    where changepriceid = #{changepriceid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Changeprice" >
+    insert into tb_dini_changeprice (changepriceid, menuid, dishesid, 
+      orgprice, price, orgmemberprice, 
+      remark, createuser, createtime, 
+      starttime)
+    values (#{changepriceid,jdbcType=INTEGER}, #{menuid,jdbcType=INTEGER}, #{dishesid,jdbcType=INTEGER}, 
+      #{orgprice,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, #{orgmemberprice,jdbcType=DOUBLE}, 
+      #{remark,jdbcType=VARCHAR}, #{createuser,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{starttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Changeprice" >
+    insert into tb_dini_changeprice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="changepriceid != null" >
+        changepriceid,
+      </if>
+      <if test="menuid != null" >
+        menuid,
+      </if>
+      <if test="dishesid != null" >
+        dishesid,
+      </if>
+      <if test="orgprice != null" >
+        orgprice,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="orgmemberprice != null" >
+        orgmemberprice,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="changepriceid != null" >
+        #{changepriceid,jdbcType=INTEGER},
+      </if>
+      <if test="menuid != null" >
+        #{menuid,jdbcType=INTEGER},
+      </if>
+      <if test="dishesid != null" >
+        #{dishesid,jdbcType=INTEGER},
+      </if>
+      <if test="orgprice != null" >
+        #{orgprice,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="orgmemberprice != null" >
+        #{orgmemberprice,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Changeprice" >
+    update tb_dini_changeprice
+    <set >
+      <if test="menuid != null" >
+        menuid = #{menuid,jdbcType=INTEGER},
+      </if>
+      <if test="dishesid != null" >
+        dishesid = #{dishesid,jdbcType=INTEGER},
+      </if>
+      <if test="orgprice != null" >
+        orgprice = #{orgprice,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="orgmemberprice != null" >
+        orgmemberprice = #{orgmemberprice,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where changepriceid = #{changepriceid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Changeprice" >
+    update tb_dini_changeprice
+    set menuid = #{menuid,jdbcType=INTEGER},
+      dishesid = #{dishesid,jdbcType=INTEGER},
+      orgprice = #{orgprice,jdbcType=DOUBLE},
+      price = #{price,jdbcType=DOUBLE},
+      orgmemberprice = #{orgmemberprice,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR},
+      createuser = #{createuser,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      starttime = #{starttime,jdbcType=TIMESTAMP}
+    where changepriceid = #{changepriceid,jdbcType=INTEGER}
+  </update>
+</mapper>

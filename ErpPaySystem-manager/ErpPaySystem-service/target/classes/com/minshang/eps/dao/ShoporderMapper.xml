@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.ShoporderMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Shoporder" >
+    <id column="shoporderid" property="shoporderid" jdbcType="INTEGER" />
+    <result column="orgid" property="orgid" jdbcType="INTEGER" />
+    <result column="orderid" property="orderid" jdbcType="VARCHAR" />
+    <result column="ordertype" property="ordertype" jdbcType="TINYINT" />
+    <result column="goodsid" property="goodsid" jdbcType="INTEGER" />
+    <result column="goodsnum" property="goodsnum" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="auditor" property="auditor" jdbcType="INTEGER" />
+    <result column="audittime" property="audittime" jdbcType="TIMESTAMP" />
+    <result column="sendtime" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="puttime" property="puttime" jdbcType="TIMESTAMP" />
+    <result column="supplierid" property="supplierid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    shoporderid, orgid, orderid, ordertype, goodsid, goodsnum, address, remark, createuser, 
+    createtime, price, state, auditor, audittime, sendtime, puttime, supplierid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_shoporder
+    where shoporderid = #{shoporderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_shoporder
+    where shoporderid = #{shoporderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Shoporder" >
+    insert into tb_dini_shoporder (shoporderid, orgid, orderid, 
+      ordertype, goodsid, goodsnum, 
+      address, remark, createuser, 
+      createtime, price, state, 
+      auditor, audittime, sendtime, 
+      puttime, supplierid)
+    values (#{shoporderid,jdbcType=INTEGER}, #{orgid,jdbcType=INTEGER}, #{orderid,jdbcType=VARCHAR}, 
+      #{ordertype,jdbcType=TINYINT}, #{goodsid,jdbcType=INTEGER}, #{goodsnum,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createuser,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{price,jdbcType=DOUBLE}, #{state,jdbcType=TINYINT}, 
+      #{auditor,jdbcType=INTEGER}, #{audittime,jdbcType=TIMESTAMP}, #{sendtime,jdbcType=TIMESTAMP}, 
+      #{puttime,jdbcType=TIMESTAMP}, #{supplierid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Shoporder" >
+    insert into tb_dini_shoporder
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shoporderid != null" >
+        shoporderid,
+      </if>
+      <if test="orgid != null" >
+        orgid,
+      </if>
+      <if test="orderid != null" >
+        orderid,
+      </if>
+      <if test="ordertype != null" >
+        ordertype,
+      </if>
+      <if test="goodsid != null" >
+        goodsid,
+      </if>
+      <if test="goodsnum != null" >
+        goodsnum,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="auditor != null" >
+        auditor,
+      </if>
+      <if test="audittime != null" >
+        audittime,
+      </if>
+      <if test="sendtime != null" >
+        sendtime,
+      </if>
+      <if test="puttime != null" >
+        puttime,
+      </if>
+      <if test="supplierid != null" >
+        supplierid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shoporderid != null" >
+        #{shoporderid,jdbcType=INTEGER},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertype != null" >
+        #{ordertype,jdbcType=TINYINT},
+      </if>
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsnum != null" >
+        #{goodsnum,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="auditor != null" >
+        #{auditor,jdbcType=INTEGER},
+      </if>
+      <if test="audittime != null" >
+        #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="puttime != null" >
+        #{puttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplierid != null" >
+        #{supplierid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Shoporder" >
+    update tb_dini_shoporder
+    <set >
+      <if test="orgid != null" >
+        orgid = #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null" >
+        orderid = #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertype != null" >
+        ordertype = #{ordertype,jdbcType=TINYINT},
+      </if>
+      <if test="goodsid != null" >
+        goodsid = #{goodsid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsnum != null" >
+        goodsnum = #{goodsnum,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="auditor != null" >
+        auditor = #{auditor,jdbcType=INTEGER},
+      </if>
+      <if test="audittime != null" >
+        audittime = #{audittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendtime != null" >
+        sendtime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="puttime != null" >
+        puttime = #{puttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supplierid != null" >
+        supplierid = #{supplierid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where shoporderid = #{shoporderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Shoporder" >
+    update tb_dini_shoporder
+    set orgid = #{orgid,jdbcType=INTEGER},
+      orderid = #{orderid,jdbcType=VARCHAR},
+      ordertype = #{ordertype,jdbcType=TINYINT},
+      goodsid = #{goodsid,jdbcType=INTEGER},
+      goodsnum = #{goodsnum,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createuser = #{createuser,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=DOUBLE},
+      state = #{state,jdbcType=TINYINT},
+      auditor = #{auditor,jdbcType=INTEGER},
+      audittime = #{audittime,jdbcType=TIMESTAMP},
+      sendtime = #{sendtime,jdbcType=TIMESTAMP},
+      puttime = #{puttime,jdbcType=TIMESTAMP},
+      supplierid = #{supplierid,jdbcType=INTEGER}
+    where shoporderid = #{shoporderid,jdbcType=INTEGER}
+  </update>
+</mapper>

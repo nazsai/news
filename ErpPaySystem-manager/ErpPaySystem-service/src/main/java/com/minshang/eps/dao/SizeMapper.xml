@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.SizeMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Size" >
+    <id column="sizeid" property="sizeid" jdbcType="INTEGER" />
+    <result column="sizename" property="sizename" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    sizeid, sizename
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_size
+    where sizeid = #{sizeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_size
+    where sizeid = #{sizeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Size" >
+    insert into tb_dini_size (sizeid, sizename)
+    values (#{sizeid,jdbcType=INTEGER}, #{sizename,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Size" >
+    insert into tb_dini_size
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sizeid != null" >
+        sizeid,
+      </if>
+      <if test="sizename != null" >
+        sizename,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sizeid != null" >
+        #{sizeid,jdbcType=INTEGER},
+      </if>
+      <if test="sizename != null" >
+        #{sizename,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Size" >
+    update tb_dini_size
+    <set >
+      <if test="sizename != null" >
+        sizename = #{sizename,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sizeid = #{sizeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Size" >
+    update tb_dini_size
+    set sizename = #{sizename,jdbcType=VARCHAR}
+    where sizeid = #{sizeid,jdbcType=INTEGER}
+  </update>
+  <!-- 查询规格数量 -->
+  <select id="count" resultType="int" parameterType="string">
+  	select count(*) from tb_dini_size
+  	<if test="sizename != null">
+  		where sizename like concat('%',#{sizename},'%')
+  	</if>
+  </select>
+  <!-- 分页展示规格 -->
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.minshang.eps.util.PageParam">
+  	select s.sizeid,s.sizename,count(*) from tb_dini_size s
+	left join tb_dini_sizeright sr on s.sizeid=sr.sizeid
+	<if test="object.sizename !=null">
+		where s.sizename like concat('%',#{object.sizename},'%')
+	</if>
+	group by s.sizeid,s.sizename
+	limit ${(currPage-1)*pageSize},${pageSize}
+  </select>
+</mapper>

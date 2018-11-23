@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.DepotMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Depot" >
+    <id column="depotid" property="depotid" jdbcType="INTEGER" />
+    <result column="depotcode" property="depotcode" jdbcType="VARCHAR" />
+    <result column="depotname" property="depotname" jdbcType="VARCHAR" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="depotype" property="depotype" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    depotid, depotcode, depotname, createuser, createtime, depotype
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_depot
+    where depotid = #{depotid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_depot
+    where depotid = #{depotid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Depot" >
+    insert into tb_dini_depot (depotid, depotcode, depotname, 
+      createuser, createtime, depotype
+      )
+    values (#{depotid,jdbcType=INTEGER}, #{depotcode,jdbcType=VARCHAR}, #{depotname,jdbcType=VARCHAR}, 
+      #{createuser,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{depotype,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Depot" >
+    insert into tb_dini_depot
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="depotid != null" >
+        depotid,
+      </if>
+      <if test="depotcode != null" >
+        depotcode,
+      </if>
+      <if test="depotname != null" >
+        depotname,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="depotype != null" >
+        depotype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="depotid != null" >
+        #{depotid,jdbcType=INTEGER},
+      </if>
+      <if test="depotcode != null" >
+        #{depotcode,jdbcType=VARCHAR},
+      </if>
+      <if test="depotname != null" >
+        #{depotname,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="depotype != null" >
+        #{depotype,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Depot" >
+    update tb_dini_depot
+    <set >
+      <if test="depotcode != null" >
+        depotcode = #{depotcode,jdbcType=VARCHAR},
+      </if>
+      <if test="depotname != null" >
+        depotname = #{depotname,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="depotype != null" >
+        depotype = #{depotype,jdbcType=TINYINT},
+      </if>
+    </set>
+    where depotid = #{depotid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Depot" >
+    update tb_dini_depot
+    set depotcode = #{depotcode,jdbcType=VARCHAR},
+      depotname = #{depotname,jdbcType=VARCHAR},
+      createuser = #{createuser,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      depotype = #{depotype,jdbcType=TINYINT}
+    where depotid = #{depotid,jdbcType=INTEGER}
+  </update>
+</mapper>

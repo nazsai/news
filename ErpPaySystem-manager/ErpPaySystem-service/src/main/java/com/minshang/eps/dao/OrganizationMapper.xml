@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.OrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Organization" >
+    <id column="orgid" property="orgid" jdbcType="INTEGER" />
+    <result column="orgname" property="orgname" jdbcType="VARCHAR" />
+    <result column="orgtype" property="orgtype" jdbcType="TINYINT" />
+    <result column="orglv" property="orglv" jdbcType="TINYINT" />
+    <result column="parentorgid" property="parentorgid" jdbcType="INTEGER" />
+    <result column="industryid" property="industryid" jdbcType="INTEGER" />
+    <result column="shoptype" property="shoptype" jdbcType="TINYINT" />
+    <result column="shopmoudle" property="shopmoudle" jdbcType="INTEGER" />
+    <result column="telphoneno" property="telphoneno" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifytime" property="modifytime" jdbcType="TIMESTAMP" />
+    <result column="activationkey" property="activationkey" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orgid, orgname, orgtype, orglv, parentorgid, industryid, shoptype, shopmoudle, telphoneno, 
+    address, userid, createuser, createtime, modifytime, activationkey, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sys_organization
+    where orgid = #{orgid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sys_organization
+    where orgid = #{orgid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Organization" >
+    insert into tb_sys_organization (orgid, orgname, orgtype, 
+      orglv, parentorgid, industryid, 
+      shoptype, shopmoudle, telphoneno, 
+      address, userid, createuser, 
+      createtime, modifytime, activationkey, 
+      state)
+    values (#{orgid,jdbcType=INTEGER}, #{orgname,jdbcType=VARCHAR}, #{orgtype,jdbcType=TINYINT}, 
+      #{orglv,jdbcType=TINYINT}, #{parentorgid,jdbcType=INTEGER}, #{industryid,jdbcType=INTEGER}, 
+      #{shoptype,jdbcType=TINYINT}, #{shopmoudle,jdbcType=INTEGER}, #{telphoneno,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, #{createuser,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{modifytime,jdbcType=TIMESTAMP}, #{activationkey,jdbcType=VARCHAR}, 
+      #{state,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Organization" >
+    insert into tb_sys_organization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgid != null" >
+        orgid,
+      </if>
+      <if test="orgname != null" >
+        orgname,
+      </if>
+      <if test="orgtype != null" >
+        orgtype,
+      </if>
+      <if test="orglv != null" >
+        orglv,
+      </if>
+      <if test="parentorgid != null" >
+        parentorgid,
+      </if>
+      <if test="industryid != null" >
+        industryid,
+      </if>
+      <if test="shoptype != null" >
+        shoptype,
+      </if>
+      <if test="shopmoudle != null" >
+        shopmoudle,
+      </if>
+      <if test="telphoneno != null" >
+        telphoneno,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="modifytime != null" >
+        modifytime,
+      </if>
+      <if test="activationkey != null" >
+        activationkey,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgid != null" >
+        #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="orgname != null" >
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgtype != null" >
+        #{orgtype,jdbcType=TINYINT},
+      </if>
+      <if test="orglv != null" >
+        #{orglv,jdbcType=TINYINT},
+      </if>
+      <if test="parentorgid != null" >
+        #{parentorgid,jdbcType=INTEGER},
+      </if>
+      <if test="industryid != null" >
+        #{industryid,jdbcType=INTEGER},
+      </if>
+      <if test="shoptype != null" >
+        #{shoptype,jdbcType=TINYINT},
+      </if>
+      <if test="shopmoudle != null" >
+        #{shopmoudle,jdbcType=INTEGER},
+      </if>
+      <if test="telphoneno != null" >
+        #{telphoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifytime != null" >
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activationkey != null" >
+        #{activationkey,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Organization" >
+    update tb_sys_organization
+    <set >
+      <if test="orgname != null" >
+        orgname = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgtype != null" >
+        orgtype = #{orgtype,jdbcType=TINYINT},
+      </if>
+      <if test="orglv != null" >
+        orglv = #{orglv,jdbcType=TINYINT},
+      </if>
+      <if test="parentorgid != null" >
+        parentorgid = #{parentorgid,jdbcType=INTEGER},
+      </if>
+      <if test="industryid != null" >
+        industryid = #{industryid,jdbcType=INTEGER},
+      </if>
+      <if test="shoptype != null" >
+        shoptype = #{shoptype,jdbcType=TINYINT},
+      </if>
+      <if test="shopmoudle != null" >
+        shopmoudle = #{shopmoudle,jdbcType=INTEGER},
+      </if>
+      <if test="telphoneno != null" >
+        telphoneno = #{telphoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifytime != null" >
+        modifytime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activationkey != null" >
+        activationkey = #{activationkey,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+    </set>
+    where orgid = #{orgid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Organization" >
+    update tb_sys_organization
+    set orgname = #{orgname,jdbcType=VARCHAR},
+      orgtype = #{orgtype,jdbcType=TINYINT},
+      orglv = #{orglv,jdbcType=TINYINT},
+      parentorgid = #{parentorgid,jdbcType=INTEGER},
+      industryid = #{industryid,jdbcType=INTEGER},
+      shoptype = #{shoptype,jdbcType=TINYINT},
+      shopmoudle = #{shopmoudle,jdbcType=INTEGER},
+      telphoneno = #{telphoneno,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER},
+      createuser = #{createuser,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      modifytime = #{modifytime,jdbcType=TIMESTAMP},
+      activationkey = #{activationkey,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT}
+    where orgid = #{orgid,jdbcType=INTEGER}
+  </update>
+</mapper>

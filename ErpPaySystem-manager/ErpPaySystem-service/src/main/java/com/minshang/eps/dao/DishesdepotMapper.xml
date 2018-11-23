@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.DishesdepotMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Dishesdepot" >
+    <id column="dishesdepotid" property="dishesdepotid" jdbcType="INTEGER" />
+    <result column="dishesdepotname" property="dishesdepotname" jdbcType="VARCHAR" />
+    <result column="orgid" property="orgid" jdbcType="INTEGER" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dishesdepotid, dishesdepotname, orgid, createuser, createtime, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_dishesdepot
+    where dishesdepotid = #{dishesdepotid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_dishesdepot
+    where dishesdepotid = #{dishesdepotid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Dishesdepot" >
+    INSERT INTO tb_dini_dishesdepot 
+    (dishesdepotname, orgid, createuser, createtime, state)
+    VALUES 
+    (#{dishesdepotname,jdbcType=VARCHAR},'0', #{createuser,jdbcType=INTEGER}, now(), #{state,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Dishesdepot" >
+    insert into tb_dini_dishesdepot
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dishesdepotid != null" >
+        dishesdepotid,
+      </if>
+      <if test="dishesdepotname != null" >
+        dishesdepotname,
+      </if>
+      <if test="orgid != null" >
+        orgid,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dishesdepotid != null" >
+        #{dishesdepotid,jdbcType=INTEGER},
+      </if>
+      <if test="dishesdepotname != null" >
+        #{dishesdepotname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Dishesdepot" >
+    update tb_dini_dishesdepot
+    <set >
+      <if test="dishesdepotname != null" >
+        dishesdepotname = #{dishesdepotname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgid != null" >
+        orgid = #{orgid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+    </set>
+    where dishesdepotid = #{dishesdepotid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Dishesdepot" >
+    update tb_dini_dishesdepot
+    set dishesdepotname = #{dishesdepotname,jdbcType=VARCHAR},
+      orgid = #{orgid,jdbcType=INTEGER},
+      createuser = #{createuser,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=TINYINT}
+    where dishesdepotid = #{dishesdepotid,jdbcType=INTEGER}
+  </update>
+  <update id="changestate" parameterType="com.minshang.eps.entity.Dishesdepot">
+  	UPDATE tb_dini_dishesdepot SET state=#{state}
+  	WHERE dishesdepotid = #{dishesdepotid}
+  </update>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.minshang.eps.util.PageParam">
+  	SELECT d.dishesdepotid,d.dishesdepotname,d.createtime,u.username,o.orgname,d.state FROM tb_dini_dishesdepot d
+	LEFT JOIN tb_sys_user u ON d.createuser=u.userid
+	LEFT JOIN tb_sys_organization o ON d.orgid=o.orgid
+	<if test="object.dishesdepotname !=null">
+		WHERE d.dishesdepotname LIKE CONCAT('%',#{object.dishesdepotname},'%')
+	</if>
+	LIMIT ${(currPage-1)*pageSize},${pageSize}
+  </select>
+  <select id="count" resultType="int">
+  	SELECT COUNT(*) FROM tb_dini_dishesdepot
+  </select>
+  <select id="checkrepeat" parameterType="string" resultType="int">
+  	SELECT COUNT(*) FROM tb_dini_dishesdepot WHERE dishesdepotname=#{dishesdepotname}
+  </select>
+</mapper>

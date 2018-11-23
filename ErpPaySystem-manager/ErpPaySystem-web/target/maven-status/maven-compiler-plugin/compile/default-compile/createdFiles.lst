@@ -1,0 +1,5 @@
+com\minshang\eps\controller\LoginController.class
+com\minshang\eps\shiro\AuthRealm.class
+com\minshang\eps\controller\RoleInfoController.class
+com\minshang\eps\controller\BranchInfoController.class
+com\minshang\eps\controller\ModuleController.class

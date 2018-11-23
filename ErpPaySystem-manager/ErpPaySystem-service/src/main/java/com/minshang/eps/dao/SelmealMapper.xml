@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.SelmealMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Selmeal" >
+    <id column="mealid" property="mealid" jdbcType="INTEGER" />
+    <result column="dishesdepotid" property="dishesdepotid" jdbcType="INTEGER" />
+    <result column="mealname" property="mealname" jdbcType="VARCHAR" />
+    <result column="mealtype" property="mealtype" jdbcType="TINYINT" />
+    <result column="oriprice" property="oriprice" jdbcType="DOUBLE" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="memberprice" property="memberprice" jdbcType="DOUBLE" />
+    <result column="picurl" property="picurl" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="weigth" property="weigth" jdbcType="TINYINT" />
+    <result column="recommend" property="recommend" jdbcType="TINYINT" />
+    <result column="hot" property="hot" jdbcType="TINYINT" />
+    <result column="pushmoney" property="pushmoney" jdbcType="TINYINT" />
+    <result column="pushtype" property="pushtype" jdbcType="TINYINT" />
+    <result column="fixmoney" property="fixmoney" jdbcType="DOUBLE" />
+    <result column="proportion" property="proportion" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mealid, dishesdepotid, mealname, mealtype, oriprice, price, memberprice, picurl, 
+    state, weigth, recommend, hot, pushmoney, pushtype, fixmoney, proportion
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_selmeal
+    where mealid = #{mealid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_selmeal
+    where mealid = #{mealid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Selmeal" >
+    insert into tb_dini_selmeal (mealid, dishesdepotid, mealname, 
+      mealtype, oriprice, price, 
+      memberprice, picurl, state, 
+      weigth, recommend, hot, 
+      pushmoney, pushtype, fixmoney, 
+      proportion)
+    values (#{mealid,jdbcType=INTEGER}, #{dishesdepotid,jdbcType=INTEGER}, #{mealname,jdbcType=VARCHAR}, 
+      #{mealtype,jdbcType=TINYINT}, #{oriprice,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE}, 
+      #{memberprice,jdbcType=DOUBLE}, #{picurl,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, 
+      #{weigth,jdbcType=TINYINT}, #{recommend,jdbcType=TINYINT}, #{hot,jdbcType=TINYINT}, 
+      #{pushmoney,jdbcType=TINYINT}, #{pushtype,jdbcType=TINYINT}, #{fixmoney,jdbcType=DOUBLE}, 
+      #{proportion,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Selmeal" >
+    insert into tb_dini_selmeal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mealid != null" >
+        mealid,
+      </if>
+      <if test="dishesdepotid != null" >
+        dishesdepotid,
+      </if>
+      <if test="mealname != null" >
+        mealname,
+      </if>
+      <if test="mealtype != null" >
+        mealtype,
+      </if>
+      <if test="oriprice != null" >
+        oriprice,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="memberprice != null" >
+        memberprice,
+      </if>
+      <if test="picurl != null" >
+        picurl,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="weigth != null" >
+        weigth,
+      </if>
+      <if test="recommend != null" >
+        recommend,
+      </if>
+      <if test="hot != null" >
+        hot,
+      </if>
+      <if test="pushmoney != null" >
+        pushmoney,
+      </if>
+      <if test="pushtype != null" >
+        pushtype,
+      </if>
+      <if test="fixmoney != null" >
+        fixmoney,
+      </if>
+      <if test="proportion != null" >
+        proportion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mealid != null" >
+        #{mealid,jdbcType=INTEGER},
+      </if>
+      <if test="dishesdepotid != null" >
+        #{dishesdepotid,jdbcType=INTEGER},
+      </if>
+      <if test="mealname != null" >
+        #{mealname,jdbcType=VARCHAR},
+      </if>
+      <if test="mealtype != null" >
+        #{mealtype,jdbcType=TINYINT},
+      </if>
+      <if test="oriprice != null" >
+        #{oriprice,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="memberprice != null" >
+        #{memberprice,jdbcType=DOUBLE},
+      </if>
+      <if test="picurl != null" >
+        #{picurl,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="weigth != null" >
+        #{weigth,jdbcType=TINYINT},
+      </if>
+      <if test="recommend != null" >
+        #{recommend,jdbcType=TINYINT},
+      </if>
+      <if test="hot != null" >
+        #{hot,jdbcType=TINYINT},
+      </if>
+      <if test="pushmoney != null" >
+        #{pushmoney,jdbcType=TINYINT},
+      </if>
+      <if test="pushtype != null" >
+        #{pushtype,jdbcType=TINYINT},
+      </if>
+      <if test="fixmoney != null" >
+        #{fixmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="proportion != null" >
+        #{proportion,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Selmeal" >
+    update tb_dini_selmeal
+    <set >
+      <if test="dishesdepotid != null" >
+        dishesdepotid = #{dishesdepotid,jdbcType=INTEGER},
+      </if>
+      <if test="mealname != null" >
+        mealname = #{mealname,jdbcType=VARCHAR},
+      </if>
+      <if test="mealtype != null" >
+        mealtype = #{mealtype,jdbcType=TINYINT},
+      </if>
+      <if test="oriprice != null" >
+        oriprice = #{oriprice,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="memberprice != null" >
+        memberprice = #{memberprice,jdbcType=DOUBLE},
+      </if>
+      <if test="picurl != null" >
+        picurl = #{picurl,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="weigth != null" >
+        weigth = #{weigth,jdbcType=TINYINT},
+      </if>
+      <if test="recommend != null" >
+        recommend = #{recommend,jdbcType=TINYINT},
+      </if>
+      <if test="hot != null" >
+        hot = #{hot,jdbcType=TINYINT},
+      </if>
+      <if test="pushmoney != null" >
+        pushmoney = #{pushmoney,jdbcType=TINYINT},
+      </if>
+      <if test="pushtype != null" >
+        pushtype = #{pushtype,jdbcType=TINYINT},
+      </if>
+      <if test="fixmoney != null" >
+        fixmoney = #{fixmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="proportion != null" >
+        proportion = #{proportion,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where mealid = #{mealid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Selmeal" >
+    update tb_dini_selmeal
+    set dishesdepotid = #{dishesdepotid,jdbcType=INTEGER},
+      mealname = #{mealname,jdbcType=VARCHAR},
+      mealtype = #{mealtype,jdbcType=TINYINT},
+      oriprice = #{oriprice,jdbcType=DOUBLE},
+      price = #{price,jdbcType=DOUBLE},
+      memberprice = #{memberprice,jdbcType=DOUBLE},
+      picurl = #{picurl,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      weigth = #{weigth,jdbcType=TINYINT},
+      recommend = #{recommend,jdbcType=TINYINT},
+      hot = #{hot,jdbcType=TINYINT},
+      pushmoney = #{pushmoney,jdbcType=TINYINT},
+      pushtype = #{pushtype,jdbcType=TINYINT},
+      fixmoney = #{fixmoney,jdbcType=DOUBLE},
+      proportion = #{proportion,jdbcType=DOUBLE}
+    where mealid = #{mealid,jdbcType=INTEGER}
+  </update>
+  <select id="count" resultType="int" parameterType="com.minshang.eps.util.PageParam">
+  	SELECT count(*) FROM tb_dini_selmeal sm 
+	LEFT JOIN tb_dini_mealright m ON sm.mealid=m.mealid
+	LEFT JOIN tb_dini_dishes d ON m.dishesid=d.dishesid
+	WHERE sm.dishesdepotid=#{object.dishesdepotid}
+	<if test="object.mealname != null">
+		AND sm.mealname LIKE CONCAT('%',#{object.mealname},'%')
+	</if>
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.minshang.eps.util.PageParam">
+  	SELECT sm.mealid,sm.mealname,sm.mealtype,sm.oriprice,sm.price,sm.memberprice,
+	sm.state,GROUP_CONCAT(d.dishesname) AS alldishesname
+	FROM tb_dini_selmeal sm 
+	LEFT JOIN tb_dini_mealright m ON sm.mealid=m.mealid
+	LEFT JOIN tb_dini_dishes d ON m.dishesid=d.dishesid
+	WHERE sm.dishesdepotid=#{object.dishesdepotid}
+	<if test="object.mealname != null">
+		AND sm.mealname LIKE CONCAT('%',#{object.mealname},'%')
+	</if>
+	GROUP BY sm.mealid
+	LIMIT ${(currPage-1)*pageSize},${pageSize}
+  </select>
+</mapper>

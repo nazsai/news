@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.BrandMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.vo.BrandVo" >
+    <id column="brandid" property="brandid" jdbcType="INTEGER" />
+    <result column="industryid" property="industryid" jdbcType="INTEGER" />
+    <result column="industryname" property="industryname" jdbcType="VARCHAR"/>
+    <result column="brandname" property="brandname" jdbcType="VARCHAR" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="modifytime" property="modifytime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    brandid, industryid, brandname, createuser, createtime, modifytime, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_brand
+    where brandid = #{brandid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_brand
+    where brandid = #{brandid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.vo.BrandVo" >
+    insert into tb_dini_brand (brandid, industryid, brandname, 
+      createuser, createtime, modifytime, 
+      state)
+    values (#{brandid,jdbcType=INTEGER}, #{industryid,jdbcType=INTEGER}, #{brandname,jdbcType=VARCHAR}, 
+      #{createuser,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{modifytime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.vo.BrandVo" >
+    insert into tb_dini_brand
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="brandid != null" >
+        brandid,
+      </if>
+      <if test="industryid != null" >
+        industryid,
+      </if>
+      <if test="brandname != null" >
+        brandname,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="modifytime != null" >
+        modifytime,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="brandid != null" >
+        #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="industryid != null" >
+        #{industryid,jdbcType=INTEGER},
+      </if>
+      <if test="brandname != null" >
+        #{brandname,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifytime != null" >
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.vo.BrandVo" >
+    update tb_dini_brand
+    <set >
+      <if test="industryid != null" >
+        industryid = #{industryid,jdbcType=INTEGER},
+      </if>
+      <if test="brandname != null" >
+        brandname = #{brandname,jdbcType=VARCHAR},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifytime != null" >
+        modifytime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+    </set>
+    where brandid = #{brandid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.vo.BrandVo" >
+    update tb_dini_brand
+    set industryid = #{industryid,jdbcType=INTEGER},
+      brandname = #{brandname,jdbcType=VARCHAR},
+      createuser = #{createuser,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      modifytime = #{modifytime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=TINYINT}
+    where brandid = #{brandid,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="pageFind" resultMap="BaseResultMap" parameterType="com.minshang.eps.vo.BrandVo">
+  	SELECT b.brandid,b.brandname,y.industryname,u.username,b.createtime
+	FROM tb_dini_brand b , tb_dini_industry y , tb_sys_user u
+	WHERE b.industryid = y.industryid AND b.createuser = u.userid
+	<if test="brandVo.brandname!=null and brandVo.brandname!=''">
+		AND b.brandname LIKE '%${brandVo.brandname}%'
+	</if>
+	AND b.`state` = 0
+	LIMIT ${(currPage-1)*pageSize},${pageSize}
+  </select>
+  
+  
+  <select id="pageFindCount" resultType="int" >
+	  	SELECT count(*)
+		FROM tb_dini_brand b , tb_dini_industry y , tb_sys_user u
+		WHERE b.industryid = y.industryid AND b.createuser = u.userid
+		<if test="brandVo.brandname!=null and brandVo.brandname!=''">
+			AND b.brandname LIKE '%${brandVo.brandname}%'
+		</if>
+		AND b.`state` = 0
+  </select>
+  
+  <select id="getCountByBrandname" resultType="int">
+  		SELECT COUNT(*) FROM tb_dini_brand
+		<if test="brandVo.brandname!=null and brandVo.brandname!=''">
+			AND brandname LIKE '%${brandVo.brandname}%'
+		</if>
+		AND state =0
+  </select>
+  
+  
+  
+  
+</mapper>
