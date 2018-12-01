@@ -31,6 +31,7 @@ public class DishestypeInit {
 			map.put(dishestype.getDishestypeid().toString(), dishestype.getDishestypename());
 		}
 		Log.debug("菜品类型初始化结束");
+		Log.info(map.toString());
 		return map;
 	}
 }

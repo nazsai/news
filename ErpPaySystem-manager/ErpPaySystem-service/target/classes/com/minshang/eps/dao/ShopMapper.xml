@@ -174,4 +174,100 @@
       activationkey = #{activationkey,jdbcType=VARCHAR}
     where shopid = #{shopid,jdbcType=INTEGER}
   </update>
+  
+  <resultMap id="ShopMap" type="com.minshang.eps.vo.ShopVo" >
+    <id column="shopid" property="shopid" jdbcType="INTEGER" />
+    <result column="shopname" property="shopname" jdbcType="VARCHAR" />
+    
+    <result column="brandid" property="brandid" jdbcType="INTEGER" />
+    <result column="brandname" property="brandname" jdbcType="VARCHAR" />
+    
+    <result column="shoptype" property="shoptype" jdbcType="TINYINT" />
+    
+    <result column="industryid" property="industryid" jdbcType="INTEGER" />
+    <result column="industryname" property="industryname" jdbcType="VARCHAR" />
+    
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    
+    <result column="shopmoudleid" property="shopmoudleid" jdbcType="INTEGER" />
+    <result column="shopmoudlename" property="shopmoudlename" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  
+  <select id="pageFind" resultMap="ShopMap" parameterType="com.minshang.eps.vo.ShopVo">
+  	SELECT s.shopname, b.brandname, a.areaname, s.shoptype, i.industryname, u.username, s.createtime, s.state, sm.shopmoudlename
+	FROM tb_dini_shop s, tb_dini_brand b, tb_dini_area a, tb_dini_industry i, tb_dini_shopmoudle sm, tb_sys_user u
+	WHERE s.brandid = b.brandid AND b.brandid = a.areaid 
+	AND b.industryid = i.industryid AND s.createuser = u.userid AND s.shopmoudleid = sm.shopmoudleid
+	<if test="shopVo.shoptype != null">
+		and s.shoptype = #{s.shoptype}
+	</if>
+	<if test="shopVo.shopname!= null and shopVo.shopname!=''">
+		AND s.shopname LIKE '%${shopVo.shopname}%'
+	</if>
+	<if test="shopVo.brandname!= null and shopVo.brandname!=''">
+		AND b.brandname LIKE '%${shopVo.brandname}%'
+	</if>
+	<if test="shopVo.areaname!= null and shopVo.areaname!=''">
+		AND a.areaname = '#{shopVo.areaname}'
+	</if>
+	AND s.`state` = 0
+	LIMIT ${(currPage-1)*pageSize},${pageSize}
+  </select>
+  
+  	
+  <select id="pageFindCount" resultType="int" parameterType="com.minshang.eps.vo.ShopVo">
+  	SELECT COUNT(*)
+	FROM tb_dini_shop s, tb_dini_brand b, tb_dini_area a, tb_dini_industry i, tb_dini_shopmoudle sm, tb_sys_user u
+	WHERE s.brandid = b.brandid AND b.brandid = a.areaid 
+	AND b.industryid = i.industryid AND s.createuser = u.userid AND s.shopmoudleid = sm.shopmoudleid
+	<if test="shopVo.shoptype != null">
+		and s.shoptype = #{s.shoptype}
+	</if>
+	<if test="shopVo.shopname!= null and shopVo.shopname!=''">
+		AND s.shopname LIKE '%${shopVo.shopname}%'
+	</if>
+	<if test="shopVo.brandname!= null and shopVo.brandname!=''">
+		AND b.brandname LIKE '%${shopVo.brandname}%'
+	</if>
+	<if test="shopVo.areaname!= null and shopVo.areaname!=''">
+		AND a.areaname = '#{shopVo.areaname}'
+	</if>
+	AND s.`state` = 0
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>

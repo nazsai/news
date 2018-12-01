@@ -19,6 +19,9 @@
     from tb_dini_section
     where sectionid = #{sectionid,jdbcType=INTEGER}
   </select>
+  
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
   	DELETE FROM tb_dini_section 
 	WHERE sectionid =  #{sectionid,jdbcType=INTEGER}	
@@ -134,7 +137,7 @@
   </insert> -->
   
   <update id="updateStateById" parameterType="com.minshang.eps.vo.SectionVo">
-  		UPDATE tb_dini_section `state` = #{state}
+  		UPDATE tb_dini_section set state = #{state}
 		WHERE sectionid = #{sectionid}
   </update>
   

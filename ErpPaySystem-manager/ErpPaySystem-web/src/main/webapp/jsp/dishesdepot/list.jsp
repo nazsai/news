@@ -22,9 +22,6 @@
     <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
   </div>
 </script>
-<script type="text/javascript">
-	  
-</script>
 </head>
 <body>
   <!-- <form class="layui-form" action="" style="width: 30%">

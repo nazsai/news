@@ -2,6 +2,8 @@ package com.minshang.eps.service.institution;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +11,7 @@ import com.minshang.eps.dao.BrandMapper;
 import com.minshang.eps.entity.Brand;
 import com.minshang.eps.service.interfac.BrandService;
 import com.minshang.eps.util.PageResult;
+import com.minshang.eps.util.ReturnValueDomain;
 import com.minshang.eps.vo.BrandVo;
 
 /**
@@ -18,6 +21,8 @@ import com.minshang.eps.vo.BrandVo;
  */
 @Service
 public class BrandServiceImpl implements BrandService {
+	
+	private final Logger Log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private BrandMapper brandMapper;

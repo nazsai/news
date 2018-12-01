@@ -36,6 +36,10 @@ public class Dishes {
     private Double proportion;
 
     private Double cost;
+    
+    private Byte multispe;
+    
+    private Byte recommenddishes;
 
     public Integer getDishesid() {
         return dishesid;
@@ -180,4 +184,20 @@ public class Dishes {
     public void setCost(Double cost) {
         this.cost = cost;
     }
+
+	public Byte getMultispe() {
+		return multispe;
+	}
+
+	public void setMultispe(Byte multispe) {
+		this.multispe = multispe;
+	}
+
+	public Byte getRecommenddishes() {
+		return recommenddishes;
+	}
+
+	public void setRecommenddishes(Byte recommenddishes) {
+		this.recommenddishes = recommenddishes;
+	}
 }

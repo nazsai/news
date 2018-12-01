@@ -2,12 +2,21 @@ package com.minshang.eps.entity;
 
 import java.util.Date;
 
+/**
+ * 	权限模块（Vo）
+ * @author Administrator
+ *
+ */
 public class Shopmoudle {
     private Integer shopmoudleid;
 
     private String shopmoudlename;
+    /**已关联门店 */
+    private String shopname;
 
     private Integer createuser;
+    /**创建人 */
+    private String username;
 
     private Date createdate;
 
@@ -52,4 +61,22 @@ public class Shopmoudle {
     public void setModifytime(Date modifytime) {
         this.modifytime = modifytime;
     }
+
+	public String getShopname() {
+		return shopname;
+	}
+
+	public void setShopname(String shopname) {
+		this.shopname = shopname;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+    
+    
 }

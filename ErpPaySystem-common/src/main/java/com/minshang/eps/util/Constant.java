@@ -8,4 +8,6 @@ public class Constant {
 	
 	public static final String DISHESTYPENAME = "DISHESTYPENAME";
 	
+	public static final String BRANDNAME = "BRANDNAME";
+	
 }

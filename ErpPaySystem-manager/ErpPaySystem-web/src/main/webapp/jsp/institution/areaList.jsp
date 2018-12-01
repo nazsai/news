@@ -8,32 +8,29 @@
 <head>
 <meta charset="UTF-8">
 <!-- 引入layui css js -->
-<link rel="stylesheet" href="${ctx}/resource/layui/css/layui.css" media="all">
+<link rel="stylesheet" href="${ctx}/resource/layui/css/layui.css"
+	media="all">
 <script type="text/javascript" src="${ctx}/resource/layui/layui.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
 <script type="text/html" id="barDemo">
-  
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
-
+<script type="text/html" id="toolbarDemo">
+	<a class="layui-btn layui-btn-xs" lay-event="add">添加</a>
+</script>
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resource/css/common.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resource/css/main.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resource/css/pick-pcc.min.1.0.1.css">
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resource/js/jquery.min.js"></script>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resource/js/colResizable-1.3.min.js"></script>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resource/js/common.js"></script>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/resource/js/pick-pcc.min.1.0.1.js"></script>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/resource/js/pick-pcc.1.0.2.js"></script>
+
 <script type="text/javascript">
 	$(function() {
 		$(".list_table").colResizable({
@@ -48,17 +45,34 @@
 	function deleteBrand(brandid) {
 		var flag = window.confirm("确定要删除此机构信息？");
 		if (flag) {
-			window.location.href = "deleteBrand?brandid=" + id;
+			window.location.href = "deleteBrand?areaid=" + areaid;
 		}
 	}
+	
+		//从数据库获取业态数据
+	      	$.post('${ctx}/institution/tooAddBrand',function(data){
+	      		var str = "";
+	      		$.each(data,function(name,value){
+	      			str+='<option value="'+name+'">'+value+'</option>'
+	      		})
+	      		$("#brandname").append(str);
+	      	},'json')
+	    })
+	
 </script>
-<title>区域管理</title>
+<title>品牌管理</title>
 </head>
 <body>
+
+	<ul class="layui-nav" lay-filter="">
+  	<li class="layui-nav-item"><a href="${ctx}/jsp/institution/brandList.jsp">品牌管理</a></li>
+  	<li class="layui-nav-item layui-this"><a href="${ctx}/jsp/institution/areaList.jsp">区域管理</a></li>
+  	<li class="layui-nav-item"><a href="${ctx}/jsp/institution/shopList.jsp">门店管理</a></li>
+  	<li class="layui-nav-item"><a href="${ctx}/jsp/institution/shopmoudleList.jsp">权限模版</a></li>
 	<div class="container">
 
 		<div id="search_bar" class="mt10">
-			<form id="pageForm" action="pageFindBrand" method="post">
+			<form id="pageForm" action="pageFindArea" method="post">
 				<input type="hidden" name="currPage" id="currPage" /> <input
 					type="hidden" name="pageSize" id="pageSize" />
 
@@ -71,32 +85,25 @@
 							<table class="form_table" border="0" cellpadding="0"
 								cellspacing="0">
 								<tr>
-
-									<td>品牌名称</td>
+									<td>品牌名称：</td>
+									<td class="jqtransform">
+					                  	<select name="brandname" id="brandname">
+					                  		<option value=''>请选择</option>
+					                  	</select>
+					                 </td>
 									<td>
-										<select name="brandname" lay-verify="" lay-search>
-									      <option value="">==请选择==</option>
-										  <option value="1">安少爷米线</option>
-										</select>     
-										
-										
-									</td>
-
-									<td>区域名称</td>
-									<td><input type="text" name="areaname"
-										value="${areaVo.areaname }" class="input-text lh25" size="30"></td>
-									<td>
-										<!-- <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="search()">搜索</button> -->
-										<!-- <a class="layui-btn" onclick="search()">搜索</a> --> <!-- <input class="layui-btn" onclick="search()"> -->
-										<a href="javascript:void(0)" class="layui-btn" id="search">搜索</a>
+										<button class="layui-btn" lay-submit lay-filter="formDemo" onclick="search()">搜索</button>
+										<!-- <a class="layui-btn" onclick="search()">搜索</a> --> 
+										<!-- <input class="layui-btn" onclick="search()"> -->
+										<!-- <a href="javascript:void(0)" class="layui-btn" id="search" >搜索</a> -->
 										<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 									</td>
 								</tr>
-								<tr>
+								<%-- <tr>
 									<td>
-										<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+										<a href="${ctx}/jsp/institution/brandAdd.jsp" id="add">添加</a>
 									</td>
-								</tr>
+								</tr> --%>
 							</table>
 						</div>
 					</div>
@@ -106,12 +113,13 @@
 		<div id="table" class="mt10">
 			<div class="box span10 oh">
 				<table id="demo" lay-filter="test"></table>
-				<div id="page" class="page mt10" style="text-align: center;"></div>
+				<!-- <div id="page" class="page mt10" style="text-align: center;"></div> -->
 			</div>
 		</div>
 	</div>
 </body>
 <script type="text/javascript">
+
 	var param = {};
 	$("#search").click(function() {
 		var brandname = $("#brandname").val();
@@ -127,6 +135,11 @@
 	});
 </script>
 <script type="text/javascript">
+//注意：导航 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element;
+  //…
+});
 	var tableIns;
 	layui.use('table', function() {
 		var table = layui.table;
@@ -135,7 +148,7 @@
 			elem : '#demo',
 			skin : 'row', //行边框风格
 			even : true, //开启隔行背景
-			url : '${ctx}/institution/pageFindBrand', //数据接口
+			url : '${ctx}/institution/pageFindArea', //数据接口
 			page : true, //开启分页
 			request : {
 				pageName : 'currPage', //页码的参数名称，默认：page
@@ -146,7 +159,7 @@
 			cols : [ [ //表头
 				{
 					field : 'areaid',
-					title : 'areaid',
+					title : 'brandid',
 					hide : true
 				}
 				, {
@@ -156,7 +169,7 @@
 				}
 				, {
 					field : 'brandname',
-					title : '所属品牌',
+					title : '品牌名称',
 					align : 'center'
 				}
 				, {
@@ -196,20 +209,22 @@
 					obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
 					layer.close(index);
 					//向服务端发送删除指令
-					alert('删除功能当前id是' + data.brandid)
-					$.post('${ctx}/institution/deleteBrand', {
+					//alert('删除功能当前id是' + data.brandid)
+					$.post('${ctx}/institution/deleteArea', {
 						brandid : data.brandid
 					}, function(data) {
 						layer.msg("删除成功！！");
 					})
 				});
 			} else if (layEvent === 'edit') { //编辑
-				//do something
-				alert('更新功能当前id是' + data.brandid)
+				// alert('更新功能当前id是'+data.brandid)
 				//同步更新缓存对应的值
-				obj.update({
-					username : '123',
-					title : 'xxx'
+				layer.open({
+					title : '编辑品牌',
+					closeBtn : 2,
+					type : 2,
+					content : '${ctx}/jsp/institution/areaUpdate.jsp',
+					area : [ '1000px', '500px' ]
 				});
 			}
 		});
@@ -217,7 +232,13 @@
 			var checkStatus = table.checkStatus(obj.config.id);
 			switch (obj.event) {
 			case 'add':
-				layer.msg('添加');
+				layer.open({
+					title : '添加品牌',
+					closeBtn : 2,
+					type : 2,
+					content : '${ctx}/jsp/institution/areaAdd.jsp',
+					area : [ '1000px', '500px' ]
+				});
 				break;
 			case 'delete':
 				layer.msg('删除');

@@ -90,4 +90,25 @@
       modifytime = #{modifytime,jdbcType=TIMESTAMP}
     where shopmoudleid = #{shopmoudleid,jdbcType=INTEGER}
   </update>
+  
+  <select id="pageFind" resultMap="BaseResultMap" parameterType="com.minshang.eps.entity.Shopmoudle">
+		SELECT sm.shopmoudlename,GROUP_CONCAT(s.shopname) AS shopname ,u.username,sm.createdate 
+		from tb_dini_shopmoudle sm
+		inner join tb_dini_shop s on sm.shopmoudleid=s.shopmoudleid
+		inner join tb_sys_user u on u.userid=sm.createuser
+		WHERE s.state = 0
+		GROUP BY sm.shopmoudlename,u.username,sm.createdate
+  </select>
+  
+  <select id="pageFindCount" resultType="int">
+  	SELECT COUNT(*) 
+	from tb_dini_shopmoudle sm
+	inner join tb_dini_shop s on sm.shopmoudleid=s.shopmoudleid
+	inner join tb_sys_user u on u.userid=sm.createuser
+	WHERE s.state = 0
+  </select>
+  
+  
+  
+  
 </mapper>

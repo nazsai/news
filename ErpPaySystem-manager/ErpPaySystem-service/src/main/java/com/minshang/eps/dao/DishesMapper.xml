@@ -20,6 +20,8 @@
     <result column="fixmoney" property="fixmoney" jdbcType="DOUBLE" />
     <result column="proportion" property="proportion" jdbcType="DOUBLE" />
     <result column="cost" property="cost" jdbcType="DOUBLE" />
+    <result column="multispe" property="multispe" jdbcType="TINYINT" />
+    <result column="recommenddishes" property="recommenddishes" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
     dishesid, dishesname, dishestypeid, price, memberprice, unit, spellremember, numremember, 
@@ -236,7 +238,6 @@
       state = #{state,jdbcType=TINYINT},
       weigth = #{weigth,jdbcType=TINYINT},
       recommend = #{recommend,jdbcType=TINYINT},
-      hot = #{hot,jdbcType=TINYINT},
       nowprice = #{nowprice,jdbcType=TINYINT},
       pushmoney = #{pushmoney,jdbcType=TINYINT},
       pushtype = #{pushtype,jdbcType=TINYINT},
@@ -245,4 +246,27 @@
       cost = #{cost,jdbcType=DOUBLE}
     where dishesid = #{dishesid,jdbcType=INTEGER}
   </update>
+  <select id="count" resultType="int" parameterType="com.minshang.eps.entity.Dishes">
+  	select count(*) from tb_dini_dishes
+  	<where>
+  		<if test="object.dishestypeid != null">
+  			object.dishestypeid=#{object.dishestypeid}
+  		</if>
+  		<if test="object.dishesname != null">
+  			(locate(#{object.dishesname},dishesname)>0)
+  		</if>
+  	</where>
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="com.minshang.eps.util.PageParam">
+  	SELECT dishesid,dishesname,price,multispe,unit,nowprice,recommenddishes,state FROM tb_dini_dishes
+  	<where>
+  		<if test="object.dishestypeid != null">
+  			object.dishestypeid=#{object.dishestypeid}
+  		</if>
+  		<if test="object.dishesname != null">
+  			(locate(#{object.dishesname},dishesname)>0)
+  		</if>
+  	</where>
+  	LIMIT ${(currPage-1)*pageSize},${pageSize}
+  </select>
 </mapper>

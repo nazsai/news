@@ -11,7 +11,7 @@ public class Shop {
 
     private Byte shoptype;
 
-    private Byte shopmoudle;
+    private Byte shopmoudleid;
 
     private String telphoneno;
 
@@ -26,6 +26,8 @@ public class Shop {
     private Date createtime;
 
     private String activationkey;
+
+    private Integer state;
 
     public Integer getShopid() {
         return shopid;
@@ -59,12 +61,12 @@ public class Shop {
         this.shoptype = shoptype;
     }
 
-    public Byte getShopmoudle() {
-        return shopmoudle;
+    public Byte getShopmoudleid() {
+        return shopmoudleid;
     }
 
-    public void setShopmoudle(Byte shopmoudle) {
-        this.shopmoudle = shopmoudle;
+    public void setShopmoudleid(Byte shopmoudleid) {
+        this.shopmoudleid = shopmoudleid;
     }
 
     public String getTelphoneno() {
@@ -121,5 +123,13 @@ public class Shop {
 
     public void setActivationkey(String activationkey) {
         this.activationkey = activationkey == null ? null : activationkey.trim();
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
     }
 }

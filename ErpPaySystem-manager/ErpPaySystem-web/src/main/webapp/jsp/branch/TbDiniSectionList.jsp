@@ -27,10 +27,10 @@
         
       }); 
       
-      function deleteSectionVo(id) {
+      function deleteSectionVo(sectionid) {
       	var flag = window.confirm("确定要删除此机构信息？");
       	if(flag) {
-      		window.location.href="deleteSectionVo?sectionId="+id;
+      		window.location.href="deleteSectionVo?sectionid="+sectionid;
       	}
       }
       

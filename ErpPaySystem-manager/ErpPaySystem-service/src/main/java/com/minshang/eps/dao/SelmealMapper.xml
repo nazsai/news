@@ -239,7 +239,7 @@
 	<if test="object.mealname != null">
 		AND sm.mealname LIKE CONCAT('%',#{object.mealname},'%')
 	</if>
-	GROUP BY sm.mealid
+	GROUP BY sm.mealid,sm.mealname,sm.mealtype,sm.oriprice,sm.price,sm.memberprice,sm.state
 	LIMIT ${(currPage-1)*pageSize},${pageSize}
   </select>
 </mapper>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.UserVoMapper">
+	<resultMap id="BaseResultMap" type="com.minshang.eps.vo.UserVo">
+		<id column="userid" property="userid" jdbcType="INTEGER" />
+		<result column="usercode" property="usercode" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="phoneno" property="phoneno" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="TINYINT" />
+		<result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="modifytime" property="modifytime" jdbcType="TIMESTAMP" />
+		<result column="expiretime" property="expiretime" jdbcType="TIMESTAMP" />
+		<result column="state" property="state" jdbcType="TINYINT" />
+		<result column="createuserid" property="createuserid" jdbcType="BIGINT" />
+		<result column="companyid" property="companyid" jdbcType="INTEGER" />
+		<!-- <result column="companyname" property="companyname" jdbcType="VARCHAR" /> -->
+	</resultMap>
+	<sql id="Base_Column_List">
+		userid, usercode, username, password, phoneno, sex, createtime, modifytime,
+		expiretime,
+		state, createuserid,companyid,<!-- companyname -->
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		*
+		from tb_sys_user
+		where userid = #{userid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from tb_sys_user
+		where userid = #{userid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.minshang.eps.vo.UserVo">
+		insert into tb_sys_user (userid, usercode, username,
+		password, phoneno, sex,
+		createtime, modifytime, expiretime,
+		state, createuserid,companyid<!-- ,companyname  -->)
+		values (#{userid,jdbcType=INTEGER}, #{usercode,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR}, #{phoneno,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT},
+		now(), #{modifytime,jdbcType=TIMESTAMP},
+		#{expiretime,jdbcType=TIMESTAMP},
+		#{state,jdbcType=TINYINT},
+		#{createuserid,jdbcType=BIGINT} ,#{companyid,jdbcType=INTEGER}<!-- ,#{companyname,jdbcType=VARCHAR} -->)
+	</insert>
+	<insert id="insertSelective" parameterType="com.minshang.eps.vo.UserVo">
+		insert into tb_sys_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userid != null">
+				userid,
+			</if>
+			<if test="usercode != null">
+				usercode,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="phoneno != null">
+				phoneno,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="createtime != null">
+				createtime,
+			</if>
+			<if test="modifytime != null">
+				modifytime,
+			</if>
+			<if test="expiretime != null">
+				expiretime,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="createuserid != null">
+				createuserid,
+			</if>
+			 <if test="companyid != null">
+				companyid,
+			</if>
+			<!-- <if test="companyname != null">
+				companyname,
+			</if>  -->
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userid != null">
+				#{userid,jdbcType=INTEGER},
+			</if>
+			<if test="usercode != null">
+				#{usercode,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneno != null">
+				#{phoneno,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=TINYINT},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifytime != null">
+				#{modifytime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="expiretime != null">
+				#{expiretime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=TINYINT},
+			</if>
+			<if test="createuserid != null">
+				#{createuserid,jdbcType=BIGINT},
+			</if>
+			 <if test="companyid != null">
+				companyid,
+			</if>
+			<!-- <if test="companyname != null">
+				companyname,
+			</if>  -->
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.vo.UserVo">
+		update tb_sys_user
+		<set>
+			<if test="usercode != null">
+				usercode = #{usercode,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneno != null">
+				phoneno = #{phoneno,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=TINYINT},
+			</if>
+			<if test="createtime != null">
+				createtime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifytime != null">
+				modifytime = #{modifytime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="expiretime != null">
+				expiretime = #{expiretime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=TINYINT},
+			</if>
+			<if test="createuserid != null">
+				createuserid = #{createuserid,jdbcType=BIGINT},
+			</if>
+ 			<if test="companyid != null">
+				companyid = #{companyid,jdbcType=INTEGER},
+			</if>
+			<!-- <if test="companyname != null">
+				companyname = #{companyname,jdbcType=VARCHAR},
+			</if>  -->
+		</set>
+		where userid = #{userid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.minshang.eps.vo.UserVo">
+		update tb_sys_user
+		set usercode = #{usercode,jdbcType=VARCHAR},
+		username = #{username,jdbcType=VARCHAR},
+		<!-- password = #{password,jdbcType=VARCHAR}, -->
+		<!-- phoneno = #{phoneno,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=TINYINT},
+		createtime = #{createtime,jdbcType=TIMESTAMP},
+		modifytime = #{modifytime,jdbcType=TIMESTAMP},
+		expiretime = #{expiretime,jdbcType=TIMESTAMP},
+		state = #{state,jdbcType=TINYINT},
+		createuserid = #{createuserid,jdbcType=BIGINT}, -->
+		companyid = #{createuserid,jdbcType=VARCHAR},
+		<!-- companyname = #{createuserid,jdbcType=INTEGER} -->
+		where userid = #{userid,jdbcType=INTEGER}
+	</update>
+
+	<select id="pageFind" resultMap="BaseResultMap" parameterType="com.minshang.eps.vo.UserVo">
+		SELECT u.*, c.companyname
+		FROM tb_sys_user u , tb_dini_company c
+		WHERE u.companyid = c.companyid 
+		<!-- SELECT u1.userid,u1.usercode,u1.username,u1.`password`,u1.phoneno,u1.sex,u1.createtime,
+		u1.modifytime,u1.state,u1.companyid,u2.username as createuserid,c.companyname from tb_sys_user u1
+		inner join tb_sys_user u2 on u1.createuserid=u2.userid  
+		left join tb_dini_company c on c.companyid=u1.companyid -->
+		<if test="vo.username != null and vo.username !=''">
+			AND u. username LIKE '%${vo.username}%'
+		</if>
+		LIMIT ${(currPage-1)*pageSize},${(pageSize)}
+	</select>	
+
+	  <select id="pageFindCount" resultType="Integer">
+ 		SELECT COUNT(*) 
+		FROM tb_sys_user	
+	<if test="vo.username!=null and vo.username!=''">
+		WHERE username LIKE'%${vo.username}%'
+	</if>
+  </select>
+	
+	
+	<select id="getCountByUsername" resultType="int">
+		SELECT  count(*) FROM  tb_sys_user
+		WHERE username ='#{username}'
+	    AND `state`= 0
+	</select>
+
+	<update id="updateStateById">
+		UPDATE  tb_sys_user SET state = #{state}
+		WHERE userid = #{userid}	
+	</update>
+</mapper>

@@ -43,12 +43,12 @@ public interface BrandMapper {
     int deleteByPrimaryKey(Integer brandid);
 
     /**
-     * 添加品牌
+     * 	添加品牌
      * @param record
      * @return
      */
     int insert(Brand record);
-
+    
     int insertSelective(Brand record);
 
     Brand selectByPrimaryKey(Integer brandid);

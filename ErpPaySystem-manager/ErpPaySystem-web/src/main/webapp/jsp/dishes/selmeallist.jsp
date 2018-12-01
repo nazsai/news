@@ -12,14 +12,14 @@
 <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
 </head>
 <body>
-	<ul class="layui-nav" lay-filter="" id="dishestype">
-	</ul>
+	<!-- <ul class="layui-nav" lay-filter="" id="dishestype">
+	</ul> -->
 	<table id="demo" lay-filter="test"></table>
 </body>
 <script type="text/javascript">
 	var dishesdepotid = ${param.dishesdepotid}
 	var url = "${ctx}/selmeal/list?dishesdepotid="+dishesdepotid
-	$(function(){
+	/* $(function(){
 		$.post('${ctx}/dishestype/select',function(data){
 			if(null == data){
 				return;
@@ -30,7 +30,7 @@
 			})
 			$("#dishestype").append(str);
 		},'json')
-	})
+	}) */
 </script>
 <script type="text/html" id="toolbarDemo">
   <div class="layui-btn-container">
@@ -68,6 +68,14 @@ layui.use('table', function(){
       ,{field: 'price', title: '套餐价',align : 'center'}
       ,{field: 'memberprice', title: '会员价',align : 'center'}
       ,{field: 'state', title: '启用',align : 'center'}
+      ,{title: '更多',align : 'center',templet : function(d){
+    	  return '<a class="layui-btn layui-btn-xs" onclick="tomore(\''+d.mealid+'\')">更多</a>'
+      }}
+      ,{title: '操作',align : 'center',templet : function(d){
+    	  var str = '<a class="layui-btn layui-btn-xs" onclick="modify(\''+d.mealid+'\')">编辑</a> '
+    	  str+='<a class="layui-btn layui-btn-xs" onclick="delete(\''+d.mealid+'\')">删除</a>'
+    	  return str
+      }}
     ]]
   });
     table.on('toolbar(test)', function(obj){

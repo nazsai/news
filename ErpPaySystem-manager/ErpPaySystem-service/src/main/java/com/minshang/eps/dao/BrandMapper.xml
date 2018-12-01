@@ -25,13 +25,13 @@
     delete from tb_dini_brand
     where brandid = #{brandid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.minshang.eps.vo.BrandVo" >
-    insert into tb_dini_brand (brandid, industryid, brandname, 
-      createuser, createtime, modifytime, 
+  <insert id="insert" parameterType="com.minshang.eps.entity.Brand" >
+    insert into tb_dini_brand ( industryid, brandname, 
+      createuser, createtime, 
       state)
-    values (#{brandid,jdbcType=INTEGER}, #{industryid,jdbcType=INTEGER}, #{brandname,jdbcType=VARCHAR}, 
-      #{createuser,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{modifytime,jdbcType=TIMESTAMP}, 
-      #{state,jdbcType=TINYINT})
+    values (#{industryid,jdbcType=INTEGER}, #{brandname,jdbcType=VARCHAR}, 
+      #{createuser,jdbcType=INTEGER}, now(), 
+      '0')
   </insert>
   <insert id="insertSelective" parameterType="com.minshang.eps.vo.BrandVo" >
     insert into tb_dini_brand
@@ -148,8 +148,4 @@
 		</if>
 		AND state =0
   </select>
-  
-  
-  
-  
 </mapper>

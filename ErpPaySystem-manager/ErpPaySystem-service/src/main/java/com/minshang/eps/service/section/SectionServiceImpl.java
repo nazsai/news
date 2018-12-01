@@ -44,10 +44,9 @@ public class SectionServiceImpl implements SectionService {
 	}
 
 	@Override
-	public int deleteById(int sectionid) {
+	public void deleteById(int sectionid) {
 		final String state = "1";
 		sectionMapper.updateStateById(sectionid, state);
-		return sectionid;
 	}
 
 	@Override

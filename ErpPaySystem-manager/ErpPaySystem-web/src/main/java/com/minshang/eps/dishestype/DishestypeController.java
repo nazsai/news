@@ -16,7 +16,7 @@ import com.minshang.eps.util.DataUtil;
 import com.minshang.eps.util.ReturnValueDomain;
 
 @Controller
-@RequestMapping("dishestype")
+@RequestMapping("/dishestype")
 public class DishestypeController {
 	
 	private final Logger Log = LoggerFactory.getLogger(this.getClass());
@@ -27,7 +27,7 @@ public class DishestypeController {
 	@Resource
 	private DataUtil dataUtil;
 	
-	@RequestMapping("insert")
+	@RequestMapping("/insert")
 	@ResponseBody
 	public Object insert(@ModelAttribute Dishestype dishestype){
 		ReturnValueDomain<String> ret = new ReturnValueDomain<>();
@@ -40,19 +40,19 @@ public class DishestypeController {
 		return ret.setSuccess("新增菜品类别成功");
 	}
 	
-	@RequestMapping("delete")
+	@RequestMapping("/delete")
 	@ResponseBody
 	public Object delete(Integer dishestypeid){
 		return dishestypeService.deleteByPrimaryKey(dishestypeid);
 	}
 	
-	@RequestMapping("update")
+	@RequestMapping("/update")
 	@ResponseBody
 	public Object update(@ModelAttribute Dishestype dishestype){
 		return dishestypeService.updateByPrimaryKey(dishestype);
 	}
 	
-	@RequestMapping("select")
+	@RequestMapping("/select")
 	@ResponseBody
 	public Object select(@ModelAttribute Dishestype dishestype){
 		return DataUtil.map.get(Constant.DISHESTYPENAME);

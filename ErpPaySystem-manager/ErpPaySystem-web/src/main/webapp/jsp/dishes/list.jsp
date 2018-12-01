@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${ctx}/resource/layui/css/layui.css" media="all">
 <link rel="stylesheet" href="${ctx}/resource/css/common.css">
-  <link rel="stylesheet" href="${ctx}/resource/css/style.css">
+<link rel="stylesheet" href="${ctx}/resource/css/style.css">
 <script type="text/javascript" src="${ctx}/resource/layui/layui.js"></script>
 <script type="text/javascript" src="${ctx}/resource/js/jquery.min.js"></script>
 </head>
@@ -28,16 +28,35 @@
     </dl>
   	</li> -->
 	</ul>
+	<ul class="layui-nav" id="dishestype"></ul>
 	<div style="width: 100%;height: 100%">
 	<iframe id="frame" frameborder="no" scrolling="auto" width="100%" height="100%" allowtransparency="true"></iframe>
 	</div>
 </body>
 <script type="text/javascript">
+	var dishesdepotid = ${param.dishesdepotid}
+	var url
 	$(function(){
-		var dishesdepotid = ${param.dishesdepotid}
-		var url = "${ctx}/jsp/dishes/selmeallist.jsp?dishesdepotid="+dishesdepotid
+		$.post('${ctx}/dishestype/select',function(data){
+			var str
+			$.each(data,function(key,value){
+				str+='<li class="layui-nav-item"><a href="javascript:void(0)" onclick="changetype(this,\''+key+'\')">'+value+'</a></li>'
+			})
+			$("#dishestype").append(str)
+		},'json')
+		url = "${ctx}/jsp/dishes/selmeallist.jsp?dishesdepotid="+dishesdepotid
 		$("#frame").attr("src",url)
 	})
+	function changetype(obj,dishestypeid){
+		var dishestypename = $(obj).html();
+		if(dishestypename=='套餐'){
+			url = "${ctx}/jsp/dishes/selmeallist.jsp?dishesdepotid="+dishesdepotid
+			$("#frame").attr("src",url)
+		}else{
+			url = "${ctx}/jsp/dishes/disheslist.jsp?dishesdepotid="+dishesdepotid+"&dishestypeid="+dishestypeid
+			$("#frame").attr("src",url)
+		}
+	}
 </script>
 <script type="text/javascript">
 //注意：导航 依赖 element 模块，否则无法进行功能性操作

@@ -16,6 +16,9 @@
   <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
+<script type="text/html" id="toolbarDemo">
+	<a class="layui-btn layui-btn-xs" lay-event="add">添加</a>
+</script>
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/resource/css/common.css">
@@ -49,6 +52,12 @@
 <title>品牌管理</title>
 </head>
 <body>
+
+	<ul class="layui-nav" lay-filter="">
+  	<li class="layui-nav-item layui-this"><a href="${ctx}/jsp/institution/brandList.jsp">品牌管理</a></li>
+  	<li class="layui-nav-item"><a href="${ctx}/jsp/institution/areaList.jsp">区域管理</a></li>
+  	<li class="layui-nav-item"><a href="${ctx}/jsp/institution/shopList.jsp">门店管理</a></li>
+  	<li class="layui-nav-item"><a href="${ctx}/jsp/institution/shopmoudleList.jsp">权限模版</a></li>
 	<div class="container">
 
 		<div id="search_bar" class="mt10">
@@ -70,17 +79,18 @@
 										value="${branchVo.brandname }" class="input-text lh25"
 										size="30"></td>
 									<td>
-										<!-- <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="search()">搜索</button> -->
-										<!-- <a class="layui-btn" onclick="search()">搜索</a> --> <!-- <input class="layui-btn" onclick="search()"> -->
-										<a href="javascript:void(0)" class="layui-btn" id="search">搜索</a>
+										<button class="layui-btn" lay-submit lay-filter="formDemo" onclick="search()">搜索</button>
+										<!-- <a class="layui-btn" onclick="search()">搜索</a> --> 
+										<!-- <input class="layui-btn" onclick="search()"> -->
+										<!-- <a href="javascript:void(0)" class="layui-btn" id="search" >搜索</a> -->
 										<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 									</td>
 								</tr>
-								<tr>
+								<%-- <tr>
 									<td>
-										<button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+										<a href="${ctx}/jsp/institution/brandAdd.jsp" id="add">添加</a>
 									</td>
-								</tr>
+								</tr> --%>
 							</table>
 						</div>
 					</div>
@@ -96,6 +106,7 @@
 	</div>
 </body>
 <script type="text/javascript">
+
 	var param = {};
 	$("#search").click(function() {
 		var brandname = $("#brandname").val();
@@ -111,6 +122,11 @@
 	});
 </script>
 <script type="text/javascript">
+//注意：导航 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element;
+  //…
+});
 	var tableIns;
 	layui.use('table', function() {
 		var table = layui.table;
@@ -199,8 +215,13 @@
 			var checkStatus = table.checkStatus(obj.config.id);
 			switch (obj.event) {
 			case 'add':
-				
-				layer.msg('添加');
+				layer.open({
+					title : '添加品牌',
+					closeBtn : 2,
+					type : 2,
+					content : '${ctx}/jsp/institution/brandAdd.jsp',
+					area : [ '1000px', '500px' ]
+				});
 				break;
 			case 'delete':
 				layer.msg('删除');

@@ -27,7 +27,7 @@
       createuser, createtime, depotype
       )
     values (#{depotid,jdbcType=INTEGER}, #{depotcode,jdbcType=VARCHAR}, #{depotname,jdbcType=VARCHAR}, 
-      #{createuser,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{depotype,jdbcType=TINYINT}
+      #{createuser,jdbcType=INTEGER},now(), #{depotype,jdbcType=TINYINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.minshang.eps.entity.Depot" >
@@ -103,4 +103,51 @@
       depotype = #{depotype,jdbcType=TINYINT}
     where depotid = #{depotid,jdbcType=INTEGER}
   </update>
+  
+  
+  <select id="pageFind" resultMap="BaseResultMap" parameterType="com.minshang.eps.entity.Depot">
+  		SELECT * 
+		FROM tb_dini_depot
+		<if test="depot.depotname != null and depot.depotname !=''">
+		WHERE depotname LIKE '%${depot.depotname}%'
+		</if>
+		LIMIT ${(currPage-1)*pageSize},${(pageSize)}
+  </select>
+  
+  <select id="pageFindCount" resultType="Integer">
+  		SELECT COUNT(*)
+		FROM tb_dini_depot
+		<if test="depot.depotname != null and depot.depotname !=''">
+		WHERE depotname LIKE '%${depot.depotname}%'
+		</if>
+  </select>
+  
+  <select id="getCountByDepotname" resultType="int" >
+  		SELECT COUNT(*) FROM tb_dini_depot
+		WHERE depotname ='%${depot.depotname}%'
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>

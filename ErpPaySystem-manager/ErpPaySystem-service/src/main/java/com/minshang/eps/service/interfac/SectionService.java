@@ -29,7 +29,7 @@ public interface SectionService {
 	 * @param sectionid
 	 * @return 
 	 */
-	int deleteById(int sectionid);
+     void deleteById(int sectionid);
 	/**
 	 * 修改
 	 * @param vo

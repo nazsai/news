@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.minshang.eps.dao.ShopMapper" >
+  <resultMap id="BaseResultMap" type="com.minshang.eps.entity.Shop" >
+    <id column="shopid" property="shopid" jdbcType="INTEGER" />
+    <result column="shopname" property="shopname" jdbcType="VARCHAR" />
+    <result column="brandid" property="brandid" jdbcType="INTEGER" />
+    <result column="shoptype" property="shoptype" jdbcType="TINYINT" />
+    <result column="shopmoudleid" property="shopmoudleid" jdbcType="TINYINT" />
+    <result column="telphoneno" property="telphoneno" jdbcType="VARCHAR" />
+    <result column="addid" property="addid" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="createuser" property="createuser" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="activationkey" property="activationkey" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    shopid, shopname, brandid, shoptype, shopmoudleid, telphoneno, addid, address, userid, 
+    createuser, createtime, activationkey, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dini_shop
+    where shopid = #{shopid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_dini_shop
+    where shopid = #{shopid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.minshang.eps.entity.Shop" >
+    insert into tb_dini_shop (shopid, shopname, brandid, 
+      shoptype, shopmoudleid, telphoneno, 
+      addid, address, userid, 
+      createuser, createtime, activationkey, 
+      state)
+    values (#{shopid,jdbcType=INTEGER}, #{shopname,jdbcType=VARCHAR}, #{brandid,jdbcType=INTEGER}, 
+      #{shoptype,jdbcType=TINYINT}, #{shopmoudleid,jdbcType=TINYINT}, #{telphoneno,jdbcType=VARCHAR}, 
+      #{addid,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
+      #{createuser,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{activationkey,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.minshang.eps.entity.Shop" >
+    insert into tb_dini_shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopid != null" >
+        shopid,
+      </if>
+      <if test="shopname != null" >
+        shopname,
+      </if>
+      <if test="brandid != null" >
+        brandid,
+      </if>
+      <if test="shoptype != null" >
+        shoptype,
+      </if>
+      <if test="shopmoudleid != null" >
+        shopmoudleid,
+      </if>
+      <if test="telphoneno != null" >
+        telphoneno,
+      </if>
+      <if test="addid != null" >
+        addid,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="createuser != null" >
+        createuser,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="activationkey != null" >
+        activationkey,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="shopid != null" >
+        #{shopid,jdbcType=INTEGER},
+      </if>
+      <if test="shopname != null" >
+        #{shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="brandid != null" >
+        #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="shoptype != null" >
+        #{shoptype,jdbcType=TINYINT},
+      </if>
+      <if test="shopmoudleid != null" >
+        #{shopmoudleid,jdbcType=TINYINT},
+      </if>
+      <if test="telphoneno != null" >
+        #{telphoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="addid != null" >
+        #{addid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activationkey != null" >
+        #{activationkey,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.minshang.eps.entity.Shop" >
+    update tb_dini_shop
+    <set >
+      <if test="shopname != null" >
+        shopname = #{shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="brandid != null" >
+        brandid = #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="shoptype != null" >
+        shoptype = #{shoptype,jdbcType=TINYINT},
+      </if>
+      <if test="shopmoudleid != null" >
+        shopmoudleid = #{shopmoudleid,jdbcType=TINYINT},
+      </if>
+      <if test="telphoneno != null" >
+        telphoneno = #{telphoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="addid != null" >
+        addid = #{addid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="createuser != null" >
+        createuser = #{createuser,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activationkey != null" >
+        activationkey = #{activationkey,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where shopid = #{shopid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.minshang.eps.entity.Shop" >
+    update tb_dini_shop
+    set shopname = #{shopname,jdbcType=VARCHAR},
+      brandid = #{brandid,jdbcType=INTEGER},
+      shoptype = #{shoptype,jdbcType=TINYINT},
+      shopmoudleid = #{shopmoudleid,jdbcType=TINYINT},
+      telphoneno = #{telphoneno,jdbcType=VARCHAR},
+      addid = #{addid,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER},
+      createuser = #{createuser,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      activationkey = #{activationkey,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
+    where shopid = #{shopid,jdbcType=INTEGER}
+  </update>
+</mapper>

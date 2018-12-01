@@ -2,20 +2,21 @@ package com.minshang.eps.institution;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.minshang.eps.entity.Brand;
-import com.minshang.eps.entity.Industry;
+import com.minshang.eps.entity.User;
 import com.minshang.eps.service.interfac.BrandService;
 import com.minshang.eps.service.interfac.IndustryService;
 import com.minshang.eps.util.Constant;
 import com.minshang.eps.util.DataUtil;
+import com.minshang.eps.util.MyofficeConstants;
 import com.minshang.eps.util.PageResult;
 import com.minshang.eps.util.PageUtil;
 import com.minshang.eps.vo.BrandVo;
@@ -52,17 +53,20 @@ public class BrandController {
 		return brandService.checkBrandname(param);
 	}
 	
-	@RequestMapping("/toAddBrandPage")
+	@RequestMapping("/tooAddBrand")
 	@ResponseBody
-	public Map<?, ?>  toAddBrandPage() {
+	public Map<?, ?>  tooAddBrand() {
 		Map<?, ?> map = DataUtil.map.get(Constant.INDUSTRYMAPNAME);
 		return map;
 	}
 	
 	@RequestMapping("/addBrand")
-	public String addBrand(Brand brand) {
+	@ResponseBody
+	public String addBrand(Brand brand,HttpSession session) {
+		User user = (User)session.getAttribute(MyofficeConstants.CURRUSER_SESSION);
+		brand.setCreateuser(user.getUserid());
 		brandService.addBrand(brand);
-		return "redirect:pageFindBrand";
+		return "增加成功";
 	}
 	
 	@RequestMapping("/toUpdateBrand")
